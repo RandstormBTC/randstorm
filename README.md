@@ -64,7 +64,7 @@ This is 5.729 billion keys / day.
 
 ## Download & Installing
 
-![Project Image](screenshot.png)
+![Project Image](screen.png)
 
 ```bash
 git clone https://github.com/RandstormBTC/randstorm/
