@@ -5,16 +5,7 @@
 ## Description
 From 2011 - 2015 many popular crypto exchanges used BitcoinJS to generate private keys. 
 
-There was an issue in BitcoinJS...
-> "The most common variations of the library attempts to collect entropy
-from window.crypto's CSPRNG, but due to a type error in a comparison
-this function is silently stepped over without failing. Entropy is
-subsequently gathered from math.Random (a 48bit linear congruential
-generator, seeded by the time in some browsers), and a single
-execution of a medium resolution timer. In some known configurations
-this system has substantially less than 48 bits of entropy."
-
-Many browsers lack the definition of `window.crypto.random`, which poses an issue for Bitcoin wallets utilizing a pre-2013 version of jsbn. This is crucial as it may result in the absence of a Cryptographically Secure Pseudo-Random Number Generator (CSPRNG) when operating on a modern browser.
+There was an issue in BitcoinJS. Many browsers lacked the definition of `window.crypto.random`, which poses an issue for Bitcoin wallets utilizing a pre-2015 version of jsbn. This is crucial as it may result in the absence of a Cryptographically Secure Pseudo-Random Number Generator (CSPRNG) when operating on a modern browser.
 
 Although `window.crypto.random` was present in Netscape Navigator 4.x, by the time BitcoinJS gained traction, this function was no longer available in the browsers used for generating cryptocurrency wallets. Consequently, this led to a silent failure of the `window.crypto.random` call in JSBN when employed by early versions of BitcoinJS, forcing entropy to be gathered from `Math.random()`.
 
