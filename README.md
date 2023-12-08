@@ -48,7 +48,7 @@ It then compares the P2P address in a set of addressess looking for a match. If 
 
 The program uses multiprocessing to utilize all avaiable cores. 
 
-The P2P address generation function has been optomized to use the coincurve library.
+The P2P address generation function has been optimized to use the coincurve library for very fast key generation. 
 
 Each Core can generate a private key and public key at a rate of ~ 13,000 keys/sec.  
 
