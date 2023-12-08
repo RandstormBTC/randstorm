@@ -55,11 +55,11 @@ The generated P2P Bitcoin address is cross-checked against the addresses in the 
 
 Run On Windows (cmd / powershell):
 ```bash
-python BTCHDW.py
+python randstorm.py
 ```
 Run On Linux (debian):
 ```bash
-python3 BTCHDW.py
+python3 randstorm.py
 ```
 Easy Install & Use (Just 1 Click)
 
