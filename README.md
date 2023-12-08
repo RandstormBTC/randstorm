@@ -9,7 +9,7 @@ There was an issue with BitcoinJS due to the absence of `window.crypto.random` i
 
 Consequently, this led to a silent failure of the `window.crypto.random` call in JSBN when employed by early versions of BitcoinJS, forcing entropy to be gathered from `Math.random()`.
 
-Using `Math.random()` for cryptographic key material generation is discouraged. However, during the 2011-2015 timeframe, `Math.random()` experienced issues on all major browsers. Despite its inadequacy for cryptographic purposes, it was unfortunately relied upon during that period.
+Using `Math.random()` for cryptographic key generation should never be done. However, during the 2011-2015 timeframe, `Math.random()` was used on all major browsers to generate private keys.
 
 ![Project Image](SecureRandom.png)
 
