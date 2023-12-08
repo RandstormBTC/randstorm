@@ -55,7 +55,10 @@ To save all P2P addressess to a file use:
 grep '^1' Bitcoin_addresses_December_06_2023.txt 
 </pre>
 
-
+Update the addressess to search in P2PSearch.py 
+<pre>
+file_path = 'P2P_addresses_December_06_2023.txt'
+</pre>
 ## Table of Contents
 
 - [Installation](#installation)
