@@ -9,7 +9,7 @@ There was an issue in BitcoinJS. Many browsers lacked the definition of `window.
 
 Although `window.crypto.random` was present in Netscape Navigator 4.x, by the time BitcoinJS gained traction, this function was no longer available in the browsers used for generating cryptocurrency wallets. Consequently, this led to a silent failure of the `window.crypto.random` call in JSBN when employed by early versions of BitcoinJS, forcing entropy to be gathered from `Math.random()`.
 
-It's important to note that using `Math.random()` for cryptographic key material generation is discouraged. However, during the 2011-2015 timeframe, `Math.random()` experienced issues on all major browsers. Despite its inadequacy for cryptographic purposes, it was unfortunately relied upon during that period.
+Using `Math.random()` for cryptographic key material generation is discouraged. However, during the 2011-2015 timeframe, `Math.random()` experienced issues on all major browsers. Despite its inadequacy for cryptographic purposes, it was unfortunately relied upon during that period.
 
 ![Project Image](SecureRandom.png)
 
