@@ -66,8 +66,6 @@ After HEX key is generated the string is converted to a P2P Bitcoin address in t
     P2P: 1FaVN8XPyNHchgkNRZMwBQGqTMf531yebX
 </pre>
 
-It then compares the P2P address in a set of addressess looking for a match. If there is a match it prints to file. 
-
 ## Key Generating and Searching Speed
 
 The program uses multiprocessing to utilize all avaiable cores.
