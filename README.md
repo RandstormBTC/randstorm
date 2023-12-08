@@ -54,6 +54,11 @@ You can find an updated List of all funded Bitcoin addresses at:
 
 http://addresses.loyce.club/
 
+To save all P2P addressess to a file use:
+<pre>
+grep '^1' Bitcoin_addresses_December_06_2023.txt 
+</pre>
+
 
 ## Table of Contents
 
