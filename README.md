@@ -45,7 +45,7 @@ The HEX string is created from MathRandomSimulator and converted to a P2P Bitcoi
 ## Usage 
 
 ```python
-python randstorm.py 
+python randstorm.py
 ```
 ![Project Image](P2PSearch.png)
 
