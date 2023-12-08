@@ -1,4 +1,4 @@
-## Description
+## RandStorm
 From 2011 - 2015 many popular crypto exchanges used BitcoinJS to generate private keys. 
 
 There was an issue with BitcoinJS due to the absence of `window.crypto.random` in many browsers. 
