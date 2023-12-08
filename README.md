@@ -43,18 +43,18 @@ With 6 CPU cores this function generates ~ 1,000,000 Bitcoin HEX private keys / 
 
 Compared to more secure bitcoin libraries, such secrets and os.urandom which generates keys at less than half the speed.  
 
-After HEX key is generated the string is converted to a P2P Bitcoin address in thie following format:
-
-<pre>
-    Hex: f4389d0921ead29f272294ea790cf4112140e86e347d1933fc302373fb451bdc
-    P2P: 1FaVN8XPyNHchgkNRZMwBQGqTMf531yebX
-</pre>
-
 ## Key Generating and Searching Speed
 
 The program uses multiprocessing to utilize all avaiable cores.
 
 Addresses to be searched are loaded into RAM using mmap. 
+
+After the HEX key is generated the string is converted to a P2P Bitcoin address in thie following format:
+
+<pre>
+    Hex: f4389d0921ead29f272294ea790cf4112140e86e347d1933fc302373fb451bdc
+    P2P: 1FaVN8XPyNHchgkNRZMwBQGqTMf531yebX
+</pre>
 
 The P2P address generation function has been optimized to use the coincurve library for very fast key generation. 
 
