@@ -19,7 +19,7 @@ This program generates a Random Private Key using the python equivalent to Secur
 
 ![Project Image](SecureRandom.png)
 
-Rather than using the more secure libraries to generate private keys, this function class MathRandomSimulator emulates the weak private key generation used in the JSBN library. 
+Rather than using the more secure libraries to generate private keys, this private key generator function emulates the weak private key generation used in the JSBN library. 
 
 ```python
 class MathRandomSimulator:
