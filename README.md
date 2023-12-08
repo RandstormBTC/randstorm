@@ -42,7 +42,20 @@ The HEX string is created from MathRandomSimulator and converted to a P2P Bitcoi
     P2P: 1FaVN8XPyNHchgkNRZMwBQGqTMf531yebX
 </pre>
 
-## Usage 
+## Download & Installing :
+Direct Link with .zip format all file's BTCHDwallet This Project : DOWNLOAD
+
+Clone From Git and Install:
+use git on linux:
+
+```bash
+git clone https://github.com/Pymmdrza/BTCHDwallet
+cd BTCHDwallet
+sudo chmod -x install.sh
+./install.sh
+```
+
+
 
 ```python
 python randstorm.py
