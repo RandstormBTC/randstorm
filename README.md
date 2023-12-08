@@ -1,5 +1,3 @@
-## RandStorm
-
 ![Project Image](screen.png)
 
 From 2011 - 2015 many popular crypto exchanges used BitcoinJS to generate private keys. 
