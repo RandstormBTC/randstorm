@@ -48,7 +48,7 @@ The HEX string is created from MathRandomSimulator and converted to a P2P Bitcoi
 
 ![Project Image](P2PSearch.png)
 
-The generated P2P Bitcoin address is cross-checked against the addresses in the database. 
+The generated P2P Bitcoin address is cross-checked against the addresses in the database: 'Bitcoin_addresses_December_06_2023.txt'
 
 You can find an updated List of all funded Bitcoin addresses at:
 
