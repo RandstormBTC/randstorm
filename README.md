@@ -85,6 +85,5 @@ Some configurations are not allowed in some countries (definitely not complete):
 Germany: § 202c Vorbereiten des Ausspähens und Abfangens von Daten
 United States of America (USA): Computer Fraud and Abuse Act (CFAA)
 file_path = 'P2P_addresses_December_06_2023.txt'
-</pre>
 
 Why use p2p Addressess? Becuase they can be generated very quickly and the majority of addressess are in this format. P2SH addressess (address starting with a 3) are also quickly generated but they are not as frequently used as P2P. 
