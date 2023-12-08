@@ -78,4 +78,4 @@ Update the addressess to search in P2PSearch.py
 file_path = 'P2P_addresses_December_06_2023.txt'
 </pre>
 
-Why use p2p Addressess? Becuase they can be generated very quinkly and the majority of addressess are in this format. P2SH addressess (adress starting with a 3) are also quickly generated but they are not as frequently used as P2P. 
+Why use p2p Addressess? Becuase they can be generated very quickly and the majority of addressess are in this format. P2SH addressess (address starting with a 3) are also quickly generated but they are not as frequently used as P2P. 
