@@ -7,8 +7,7 @@ Using `Math.random()` for cryptographic key generation should never be done. How
 
 ![Project Image](SecureRandom.png)
 
-This program generates a Random Private Key using the python equivalent to SecureRandom() in JSBN javascript library with Math.random(). 
-Rather than using the more secure libraries to generate private keys, this private key generator function emulates the weak private key generation used in the JSBN library from 2011 - 2015:
+This function generates a Random Private Key using the python equivalent to SecureRandom() in JSBN javascript library with Math.random(). 
 
 ```python
 class MathRandomSimulator:
