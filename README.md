@@ -5,7 +5,7 @@
 ## Description
 From 2011 - 2015 many popular crypto exchanges used BitcoinJS to generate private keys. 
 
-Unfortunately, for an incredibly popular library, there was an issue in BitcoinJS:
+For an incredibly popular library, there was an issue in BitcoinJS:
 
 “The most common variations of the library attempts to collect entropy
 from window.crypto's CSPRNG, but due to a type error in a comparison
@@ -18,6 +18,32 @@ this system has substantially less than 48 bits of entropy.”
 This program generates a Random Private Key using the python equivalent to SecureRandom() in JSBN javascript library with Math.random(). 
 
 ![Project Image](SecureRandom.png)
+
+Rather than using the more secure libraries to generate private keys, this function class MathRandomSimulator emulates the weak private key generation used in the JSBN library. 
+
+class MathRandomSimulator:
+    # Equivalent to SecureRandom() used in JSBN javascript library with Math.random()
+    def __init__(self, psize=32):
+        self.rng_pool = bytearray()
+        self.rng_pptr = 0
+        self.rng_psize = psize
+        
+        while len(self.rng_pool) < self.rng_psize:
+            t = int(random.random() * 65536) 
+            self.rng_pool.extend(t.to_bytes(2, 'big'))
+
+        self.rng_pptr = 0
+
+    def next_bytes(self, size):
+        return self.rng_get_bytes(size)
+
+    def rng_get_bytes(self, size):
+        result = bytes(self.rng_pool[self.rng_pptr:self.rng_pptr + size])
+        self.rng_pptr += size
+        return result
+
+Rather than using the more secure libraries to generate private keys, this function class MathRandomSimulator emulates the weak private key generation used in the JSBN library. 
+
 
 ## Table of Contents
 
