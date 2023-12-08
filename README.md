@@ -76,17 +76,4 @@ Update the addressess to search in P2PSearch.py
 <pre>
 file_path = 'P2P_addresses_December_06_2023.txt'
 </pre>
-## Table of Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
-
-## Installation
-
-Provide step-by-step instructions on how to install your project. You can include code snippets or commands if necessary.
-
-```bash
-npm install
