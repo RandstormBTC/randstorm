@@ -87,3 +87,6 @@ United States of America (USA): Computer Fraud and Abuse Act (CFAA)
 file_path = 'P2P_addresses_December_06_2023.txt'
 
 Why use p2p Addressess? Becuase they can be generated very quickly and the majority of addressess are in this format. P2SH addressess (address starting with a 3) are also quickly generated but they are not as frequently used as P2P. 
+
+## Donate:
+BTC: bc1q2rqz0mzwxdm0umhlllsyd5rt30uh8kswhqcnqp
