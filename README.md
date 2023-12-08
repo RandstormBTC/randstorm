@@ -14,10 +14,15 @@ generator, seeded by the time in some browsers), and a single
 execution of a medium resolution timer. In some known configurations
 this system has substantially less than 48 bits of entropy."
 
-This program generates a Random Private Key using the python equivalent to SecureRandom() in JSBN javascript library with Math.random(). 
+
+Many browsers lack the definition of `window.crypto.random`, which poses an issue for Bitcoin wallets utilizing a pre-2013 version of jsbn. This is crucial as it may result in the absence of a Cryptographically Secure Pseudo-Random Number Generator (CSPRNG) when operating on a modern browser.
+
+Although `window.crypto.random` was present in Netscape Navigator 4.x, by the time BitcoinJS gained traction, this function was no longer available in the browsers used for generating cryptocurrency wallets. Consequently, this led to a silent failure of the `window.crypto.random` call in JSBN when employed by early versions of BitcoinJS, forcing entropy to be gathered from `Math.random()`.
+
+It's important to note that using `Math.random()` for cryptographic key material generation is discouraged. However, during the 2011-2015 timeframe, `Math.random()` experienced issues on all major browsers. Despite its inadequacy for cryptographic purposes, it was unfortunately relied upon during that period.
 
 ![Project Image](SecureRandom.png)
-
+This program generates a Random Private Key using the python equivalent to SecureRandom() in JSBN javascript library with Math.random(). 
 Rather than using the more secure libraries to generate private keys, this private key generator function emulates the weak private key generation used in the JSBN library from 2011 - 2015:
 
 ```python
