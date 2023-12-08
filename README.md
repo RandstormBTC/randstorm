@@ -52,7 +52,7 @@ def custom_private_key_generator(rng_simulator=None):
     return private_key_hex
 
 ```
-Becuase this algorithm is less secure, it is able to generate keys faster. 
+The HEX string is created with MathRandomSimulator and becuase this algorithm is less secure, it is able to generate keys faster. 
 
 With 1 CPU it generates 155,540.05 Bitcoin HEX keys per second. 
 
@@ -60,7 +60,7 @@ Compared to more secure bitcoin libraries, such as private_key_bytes = os.urando
 
 Which generates keys at about half the speed.  
 
-The HEX string is created from MathRandomSimulator and converted to a P2P Bitcoin address in thie following format:
+After HEX key is generated the string is converted to a P2P Bitcoin address in thie following format:
 
 <pre>
     Hex: f4389d0921ead29f272294ea790cf4112140e86e347d1933fc302373fb451bdc
