@@ -61,7 +61,6 @@ Run On Linux (debian):
 ```bash
 python3 randstorm.py
 ```
-Easy Install & Use (Just 1 Click)
 
 You can find an updated List of all funded Bitcoin addresses at:
 
