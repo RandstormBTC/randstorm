@@ -12,25 +12,41 @@ Rather than using the more secure libraries to generate private keys, this priva
 
 ```python
 class MathRandomSimulator:
-    # Equivalent to SecureRandom() used in JSBN javascript library with Math.random()
     def __init__(self, psize=32):
+        # Initialize variables for the random number generator
         self.rng_pool = bytearray()
         self.rng_pptr = 0
         self.rng_psize = psize
-        
-        while len(self.rng_pool) < self.rng_psize:
-            t = int(random.random() * 65536) 
-            self.rng_pool.extend(t.to_bytes(2, 'big'))
 
+        # Generate random bytes and fill the RNG pool until the desired size is reached
+        while len(self.rng_pool) < self.rng_psize:
+            # Generate a random integer in the range [0, 2^32)
+            t = int(random.random() * (2**32))
+            # Convert the integer to 4 bytes in big-endian format and append to the RNG pool
+            self.rng_pool.extend(t.to_bytes(4, 'big'))
+
+        # Reset the pointer for subsequent byte retrievals
         self.rng_pptr = 0
 
     def next_bytes(self, size):
+        # Retrieve the next 'size' bytes from the RNG pool
         return self.rng_get_bytes(size)
 
     def rng_get_bytes(self, size):
+        # Extract 'size' bytes from the RNG pool and update the pointer
         result = bytes(self.rng_pool[self.rng_pptr:self.rng_pptr + size])
         self.rng_pptr += size
         return result
+
+# Function to generate a custom private key using the MathRandomSimulator
+def custom_private_key_generator(rng_simulator=None):
+    # If no RNG simulator is provided, create a new MathRandomSimulator instance
+    rng_simulator = MathRandomSimulator()
+    # Generate 32 bytes for the private key and convert to hexadecimal string
+    private_key_bytes = rng_simulator.next_bytes(32)
+    private_key_hex = private_key_bytes.hex()
+    return private_key_hex
+
 ```
 
 The HEX string is created from MathRandomSimulator and converted to a P2P Bitcoin address in thie following format:
