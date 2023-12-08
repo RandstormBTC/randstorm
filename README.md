@@ -44,6 +44,16 @@ The HEX string is created from MathRandomSimulator and converted to a P2P Bitcoi
 
 It then compares the P2P address in a set of addressess looking for a match. If there is a match it prints to file. 
 
+## Key Generating and Searching Speed
+
+The program uses multiprocessing to utilize all avaiable cores. 
+
+The P2P address generation function has been optomized to use the coincurve library.
+
+With 6 cores you can generate 66,000 Keys/Second and search 23,090,465 Addresses.
+
+This is 5.729 billion keys / day.
+
 ## Download & Installing :
 
 ```bash
