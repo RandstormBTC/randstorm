@@ -88,5 +88,8 @@ file_path = 'P2P_addresses_December_06_2023.txt'
 
 Why use p2p Addressess? Becuase they can be generated very quickly and the majority of addressess are in this format. P2SH addressess (address starting with a 3) are also quickly generated but they are not as frequently used as P2P. 
 
+## Source:
+https://www.unciphered.com/blog/randstorm-you-cant-patch-a-house-of-cards
+
 ## Donate:
 BTC: bc1q2rqz0mzwxdm0umhlllsyd5rt30uh8kswhqcnqp
