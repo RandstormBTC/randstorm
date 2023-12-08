@@ -1,4 +1,7 @@
 ## RandStorm
+
+![Project Image](screen.png)
+
 From 2011 - 2015 many popular crypto exchanges used BitcoinJS to generate private keys. 
 
 There was an issue with BitcoinJS due to the absence of `window.crypto.random` in many browsers. Consequently, this led to a silent failure of the `window.crypto.random` call in JSBN when employed by early versions of BitcoinJS, forcing entropy to be gathered from `Math.random()`.
@@ -63,8 +66,6 @@ With 6 cores it generates ~ 70,000 Keys / second and searches 23,000,000 Address
 This is 5.729 billion keys / day.
 
 ## Download & Installing
-
-![Project Image](screen.png)
 
 ```bash
 git clone https://github.com/RandstormBTC/randstorm/
