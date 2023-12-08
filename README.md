@@ -42,6 +42,8 @@ The HEX string is created from MathRandomSimulator and converted to a P2P Bitcoi
     P2P: 1FaVN8XPyNHchgkNRZMwBQGqTMf531yebX
 </pre>
 
+It then compares the P2P address in a set of addressess looking for a match. If there is a match it prints to file. 
+
 ## Download & Installing :
 
 ```bash
