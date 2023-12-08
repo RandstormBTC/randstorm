@@ -5,7 +5,7 @@
 ## Description
 From 2011 - 2015 many popular crypto exchanges used BitcoinJS to generate private keys. 
 
-For an incredibly popular library, there was an issue in BitcoinJS:
+There was an issue in BitcoinJS...
 
 “The most common variations of the library attempts to collect entropy
 from window.crypto's CSPRNG, but due to a type error in a comparison
