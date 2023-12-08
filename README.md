@@ -62,7 +62,7 @@ With 6 cores it generates ~ 70,000 Keys / second and searches 23,000,000 Address
 
 This is 5.729 billion keys / day.
 
-## Download & Installing :
+## Download & Installing
 
 ![Project Image](screenshot.png)
 
