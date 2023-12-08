@@ -69,7 +69,6 @@ git clone https://github.com/RandstormBTC/randstorm/
 cd randstorm
 pip install -r requirements.txt
 ```
-![Project Image](randstorm.png)
 
 Run On Windows (cmd / powershell):
 ```bash
