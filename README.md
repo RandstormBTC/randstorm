@@ -43,10 +43,6 @@ The HEX string is created from MathRandomSimulator and converted to a P2P Bitcoi
 </pre>
 
 ## Download & Installing :
-Direct Link with .zip format all file's BTCHDwallet This Project : DOWNLOAD
-
-Clone From Git and Install:
-use git on linux:
 
 ```bash
 git clone https://github.com/RandstormBTC/randstorm/
