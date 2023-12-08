@@ -58,9 +58,7 @@ After the HEX key is generated the string is converted to a P2P Bitcoin address 
 
 The P2P address generation function has been optimized to use the coincurve library for very fast key generation. 
 
-Each Core can generate a private key and public key at a rate of ~ 13,000 keys / second.  
-
-With 6 cores you can generate 66,000 Keys / second and search 23,000,000 Addresses / second.
+With 6 cores it generates ~ 70,000 Keys / second and searches 23,000,000 Addresses / second.
 
 This is 5.729 billion keys / day.
 
