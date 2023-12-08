@@ -46,13 +46,6 @@ class MathRandomSimulator:
 
 Rather than using the more secure libraries to generate private keys, this function class MathRandomSimulator emulates the weak private key generation used in the JSBN library. 
 
-The HEX string is created and converted to a P2P Bitcoin address in thie following format: 
-
-<pre>
-    Hex: f4389d0921ead29f272294ea790cf4112140e86e347d1933fc302373fb451bdc
-    P2P: 1FaVN8XPyNHchgkNRZMwBQGqTMf531yebX
-</pre>
-
 ```python
 def generate_P2P_address(private_key):  #Speed: 12,000 addresses per second.
     private_key_bytes = bytes.fromhex(private_key)
@@ -63,6 +56,12 @@ def generate_P2P_address(private_key):  #Speed: 12,000 addresses per second.
     p2pkh_address = base58.b58encode(bytes.fromhex(extended_public_key_hash + checksum))
     return p2pkh_address.decode()
 ```
+The HEX string is created and converted to a P2P Bitcoin address in thie following format: 
+
+<pre>
+    Hex: f4389d0921ead29f272294ea790cf4112140e86e347d1933fc302373fb451bdc
+    P2P: 1FaVN8XPyNHchgkNRZMwBQGqTMf531yebX
+</pre>
 
 ## Table of Contents
 
