@@ -17,7 +17,7 @@ this system has substantially less than 48 bits of entropy.”
 
 This program generates a Random Private Key using the python equivalent to SecureRandom() in JSBN javascript library with Math.random(). 
 
-![GitHub Logo]([https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png](https://images.squarespace-cdn.com/content/v1/6156001e4a686e24886bd0b2/95aaea52-0f97-45ec-b251-fd1a0890040a/Screenshot+from+2023-11-13+16-54-13.png?format=1500w))
+![Project Image](SecureRandom.png)
 
 ## Table of Contents
 
