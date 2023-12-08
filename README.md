@@ -44,7 +44,9 @@ It then compares the P2P address in a set of addressess looking for a match. If 
 
 ## Key Generating and Searching Speed
 
-The program uses multiprocessing to utilize all avaiable cores. 
+The program uses multiprocessing to utilize all avaiable cores.
+
+Addresses to be searched are loaded into RAM using mmap. 
 
 The P2P address generation function has been optimized to use the coincurve library for very fast key generation. 
 
