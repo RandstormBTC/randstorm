@@ -49,15 +49,9 @@ Clone From Git and Install:
 use git on linux:
 
 ```bash
-git clone https://github.com/Pymmdrza/BTCHDwallet
-cd BTCHDwallet
-sudo chmod -x install.sh
-./install.sh
-```
-
-
-
-```python
+git clone https://github.com/RandstormBTC/randstorm/
+cd randstorm
+pip install -r requirements.txt
 python randstorm.py
 ```
 ![Project Image](randstorm.png)
