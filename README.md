@@ -71,8 +71,6 @@ pip install -r requirements.txt
 ```
 ![Project Image](randstorm.png)
 
-The generated P2P Bitcoin address is cross-checked against the addresses in the database: 'Bitcoin_addresses_December_06_2023.txt'
-
 Run On Windows (cmd / powershell):
 ```bash
 python randstorm.py
