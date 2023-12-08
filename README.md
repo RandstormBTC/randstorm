@@ -1,7 +1,3 @@
-# Randstorm
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 ## Description
 From 2011 - 2015 many popular crypto exchanges used BitcoinJS to generate private keys. 
 
