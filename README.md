@@ -46,10 +46,11 @@ class MathRandomSimulator:
 
 Rather than using the more secure libraries to generate private keys, this function class MathRandomSimulator emulates the weak private key generation used in the JSBN library. 
 
-Then a P2P Bitcoin address is created using this private key in thie following format: 
+The HEX string is created and converted to a P2P Bitcoin address in thie following format: 
 
 <pre>
-1FaVN8XPyNHchgkNRZMwBQGqTMf531yebX
+    Hex: f4389d0921ead29f272294ea790cf4112140e86e347d1933fc302373fb451bdc
+    P2P: 1FaVN8XPyNHchgkNRZMwBQGqTMf531yebX
 </pre>
 
 ```python
