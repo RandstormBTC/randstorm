@@ -50,6 +50,11 @@ The HEX string is created from MathRandomSimulator and converted to a P2P Bitcoi
 
 The generated P2P Bitcoin address is cross-checked against the addresses in the database. 
 
+You can find an updated List of all funded Bitcoin addresses at:
+
+http://addresses.loyce.club/
+
+
 ## Table of Contents
 
 - [Installation](#installation)
