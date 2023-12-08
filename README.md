@@ -74,7 +74,6 @@ grep '^1' Bitcoin_addresses_December_06_2023.txt
 </pre>
 
 Update the addressess to search in P2PSearch.py 
-<pre>
 
 ## Legal
 This software is for education purporses only and should not be configured and used to find (Bitcoin/Altcoin) address hash (RIPEMD-160) collisions and use (steal) credit from third-party (Bitcoin/Altcoin) addresses. This mode might be allowed to recover lost private keys of your own public addresses only.
