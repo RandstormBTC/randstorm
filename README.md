@@ -102,6 +102,7 @@ Why use p2p Addressess? Becuase they can be generated very quickly and the major
 
 ## Source:
 https://www.unciphered.com/blog/randstorm-you-cant-patch-a-house-of-cards
+https://medium.com/@betable/tifu-by-using-math-random-f1c308c4fd9d
 
 ## Donate:
 BTC: bc1q2rqz0mzwxdm0umhlllsyd5rt30uh8kswhqcnqp
