@@ -21,7 +21,7 @@ This program generates a Random Private Key using the python equivalent to Secur
 
 Rather than using the more secure libraries to generate private keys, this function class MathRandomSimulator emulates the weak private key generation used in the JSBN library. 
 
-```
+```python
 class MathRandomSimulator:
     # Equivalent to SecureRandom() used in JSBN javascript library with Math.random()
     def __init__(self, psize=32):
