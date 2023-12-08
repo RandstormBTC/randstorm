@@ -50,7 +50,7 @@ The program uses multiprocessing to utilize all avaiable cores.
 
 The P2P address generation function has been optomized to use the coincurve library.
 
-With 6 cores you can generate 66,000 Keys/Second and search 23,090,465 Addresses.
+With 6 cores you can generate 66,000 Keys/Second and search 23,000,000 Addresses.
 
 This is 5.729 billion keys / day.
 
