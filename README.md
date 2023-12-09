@@ -50,14 +50,16 @@ The program uses multiprocessing to utilize all avaiable cores.
 
 Addresses to be searched are loaded into RAM using mmap. 
 
-After the HEX key is generated the string is converted to a P2P Bitcoin address in thie following format:
+After the HEX key is generated the string is converted to a P2PKH Compressed Bitcoin address in thie following format:
 
 <pre>
-    Hex: f4389d0921ead29f272294ea790cf4112140e86e347d1933fc302373fb451bdc
-    P2P: 1FaVN8XPyNHchgkNRZMwBQGqTMf531yebX
+    Hex: a47293a192b48f54eec6ba44e5953ca842bd0d50df5ba4a29ff02dd511a43925
+    P2P: 1KM7gf1PF1Ymg6heiDnQDqvT4wcYwGjAgM
 </pre>
 
-The P2P address generation function has been optimized to use the coincurve library for very fast key generation. 
+The P2PKH address generation function has been optimized to use the coincurve library for very fast key generation. 
+
+Only the compressed P2PKH is generated, which accounts for the majority of bitcoin wallets. 
 
 With 6 cores it generates ~ 70,000 Keys / second and searches 23,000,000 Addresses / second.
 
