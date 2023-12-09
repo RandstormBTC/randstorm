@@ -61,9 +61,7 @@ Addresses to be searched are loaded into RAM using mmap.
 
 Only the compressed P2PKH is generated, which accounts for the majority of bitcoin wallets. 
 
-With 6 cores it generates ~ 70,000 Keys / second and searches 23,000,000 Addresses / second.
-
-This is 5.729 billion keys / day.
+With 6 cores it generates ~ 70,000 Keys / second and searches 23,000,000 Addresses / second, or 5.729 billion keys / day.
 
 ## Download & Installing
 
