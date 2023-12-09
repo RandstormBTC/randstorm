@@ -42,7 +42,7 @@ The HEX string is created with MathRandomSimulator and becuase this algorithm is
 
 With 6 CPU cores this function generates ~ 1,000,000 Bitcoin HEX private keys / second. 
 
-Compared to more secure bitcoin libraries, such secrets and os.urandom which generates keys at less than half the speed.  
+Compared to more secure bitcoin libraries, such as secrets and os.urandom which generates keys at less than half the speed.  
 
 ## Key Generating and Searching Speed
 
