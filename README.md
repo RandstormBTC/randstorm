@@ -46,18 +46,18 @@ Compared to more secure bitcoin libraries, such secrets and os.urandom which gen
 
 ## Key Generating and Searching Speed
 
-The program uses multiprocessing to utilize all avaiable cores.
-
-Addresses to be searched are loaded into RAM using mmap. 
-
-After the HEX key is generated the string is converted to a P2PKH Compressed Bitcoin address in thie following format:
+After the HEX key is generated, the string is converted to a Compressed P2PKH Bitcoin address in thie following format:
 
 <pre>
     Hex: a47293a192b48f54eec6ba44e5953ca842bd0d50df5ba4a29ff02dd511a43925
     P2P: 1KM7gf1PF1Ymg6heiDnQDqvT4wcYwGjAgM
 </pre>
 
-The P2PKH address generation function has been optimized to use the coincurve library for very fast key generation. 
+The P2PKH address generation has been optimized to use the coincurve library for very fast key generation.
+
+The program uses multiprocessing to utilize all avaiable cores.
+
+Addresses to be searched are loaded into RAM using mmap. 
 
 Only the compressed P2PKH is generated, which accounts for the majority of bitcoin wallets. 
 
