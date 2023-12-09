@@ -35,7 +35,7 @@ def custom_private_key_generator(rng_simulator=None):
     rng_simulator = MathRandomSimulator()
     private_key_bytes = rng_simulator.next_bytes(32)
     private_key_hex = private_key_bytes.hex()
-    return private_key_hexx
+    return private_key_hex
 
 ```
 The HEX string is created with MathRandomSimulator and becuase this algorithm is less secure, it is able to generate keys faster. 
