@@ -26,115 +26,151 @@ console.print(btc)
 
 class MathRandomSimulator:
     def __init__(self, psize=32):
+        # Initialize the random number generator pool
         self.rng_pool = bytearray()
-        self.rng_pptr = 0
-        self.rng_psize = psize
+        self.rng_pptr = 0  # Pointer to the current position in the pool
+        self.rng_psize = psize  # Size of the pool
 
+        # Fill the pool with random bytes until it reaches the specified size
         while len(self.rng_pool) < self.rng_psize:
             t = int(random.random() * (2**32))
             self.rng_pool.extend(t.to_bytes(4, 'big'))
 
-        self.rng_pptr = 0
+        self.rng_pptr = 0  # Reset the pointer to the beginning of the pool
 
     def next_bytes(self, size):
+        # Wrapper method to get the next bytes
         return self.rng_get_bytes(size)
 
     def rng_get_bytes(self, size):
+        # Get the next 'size' bytes from the random number generator pool
         result = bytes(self.rng_pool[self.rng_pptr:self.rng_pptr + size])
-        self.rng_pptr += size
+        self.rng_pptr += size  # Move the pointer to the next position in the pool
         return result
 
 def custom_private_key_generator(rng_simulator=None):
+    # If no random number generator simulator is provided, create a new one
     rng_simulator = MathRandomSimulator()
+
+    # Generate 32 bytes (256 bits) as the private key
     private_key_bytes = rng_simulator.next_bytes(32)
+
+    # Convert the bytes to a hexadecimal string
     private_key_hex = private_key_bytes.hex()
+
+    # Return the generated private key in hexadecimal format
     return private_key_hex
-    
-def generate_P2P_address(private_key): 
+
+def generate_compressed_P2P_address(private_key):
+    # Convert the private key from hexadecimal string to bytes
     private_key_bytes = bytes.fromhex(private_key)
-    public_key = coincurve.PrivateKey(private_key_bytes).public_key.format(compressed=False)
+
+    # Derive the compressed public key from the private key using the coincurve library
+    public_key = coincurve.PrivateKey(private_key_bytes).public_key.format(compressed=True)
+
+    # Calculate the RIPEMD160 hash of the SHA256 hash of the compressed public key
     public_key_hash = hashlib.new('ripemd160', hashlib.sha256(public_key).digest()).hexdigest()
+
+    # Prepend '00' to the public key hash to create the extended public key hash
     extended_public_key_hash = '00' + public_key_hash
+
+    # Calculate the checksum using double SHA256 on the extended public key hash
     checksum = hashlib.sha256(hashlib.sha256(bytes.fromhex(extended_public_key_hash)).digest()).hexdigest()[:8]
+
+    # Concatenate the extended public key hash and the checksum, then encode in base58
     p2pkh_address = base58.b58encode(bytes.fromhex(extended_public_key_hash + checksum))
+
+    # Return the compressed P2PKH address as a string
     return p2pkh_address.decode()
     
-# Shared variable to store total count
 total_keys_generated = multiprocessing.Value('i', 0)
 
-def search_for_match(database, address_set, process_id, result_queue, rng_simulator, file_path):
-    global total_keys_generated  # Use the shared variable
+def search_for_match(database, address_set, process_id, result_queue, rng_simulator, mmapped_file):
+    global total_keys_generated  # Use the shared variable for keys/sec
 
-    # Open the file using mmap
-    with open(file_path, 'rb') as file:
-        with mmap.mmap(file.fileno(), 0, access=mmap.ACCESS_READ) as mmapped_file:
-            iteration = 0
-            keys_generated_at_start = total_keys_generated.value
-            start_time = time.time()
+    iteration = 0
+    keys_generated_at_start = total_keys_generated.value
+    start_time = time.time()
+
+    while True:
+        # Generate Private HEX and public Key
+        private_key = custom_private_key_generator(rng_simulator)
+        
+        # Generate the compressed P2PKH Bitcoin address using the private key
+        compressed_p2pkh_address = generate_compressed_P2P_address(private_key)
+
+        # Increment the total count
+        with total_keys_generated.get_lock():
+            total_keys_generated.value += 1
+
+        # Print every 100,000 keys
+        if iteration % 100000 == 0:
+            current_time = time.time()
+            elapsed_time = current_time - start_time
+
+            keys_generated = total_keys_generated.value - keys_generated_at_start
+            keys_per_second = keys_generated / elapsed_time if elapsed_time > 0 else 0
+
+            print(f"\rGenerated Keys: \033[92m{total_keys_generated.value:,.0f}\033[0m"
+                  f" | Keys/Second: \033[92m{keys_per_second:,.0f}\033[0m", end='', flush=True)
             
-            while True:
-                # Generate Private HEX and  public Key
-                private_key = custom_private_key_generator(rng_simulator)
-                p2p_address = generate_P2P_address(private_key)
-                
-                # Increment the total count
-                with total_keys_generated.get_lock():
-                    total_keys_generated.value += 1
+            # Search for a match in the memory-mapped file
+            if compressed_p2pkh_address in mmapped_file:
+                result_queue.put({
+                    'private_key_hex': private_key,
+                    'address_info': compressed_p2pkh_address,
+                })
+                break
 
-                # Print every 100,000 keys
-                if iteration % 100000 == 0:
-                    current_time = time.time()
-                    elapsed_time = current_time - start_time
-
-                    keys_generated = total_keys_generated.value - keys_generated_at_start
-                    keys_per_second = keys_generated / elapsed_time if elapsed_time > 0 else 0
-
-                    print(f"\rGenerated Keys: \033[92m{total_keys_generated.value:,.0f}\033[0m"
-                        f" | Keys/Second: \033[92m{keys_per_second:,.0f}\033[0m", end='', flush=True)
-                        
-                if 'p2pkh_address.decode()' in p2p_address and p2p_address in mmapped_file:
-                    result_queue.put({
-                        'private_key_hex': private_key,
-                        'address_info': p2p_address,
-                    })
-                    break 
-
-                iteration += 1  # Increment the iteration counter
+        iteration += 1  # Increment the iteration counter
 
 if __name__ == '__main__':
 
+    # Define the file path for the memory-mapped file containing Bitcoin addresses
     file_path = 'P2P_addresses_December_06_2023.txt'
+
+    # Initialize the address_set
+    address_set = set()
+
     # Read the entire file into a list of lines
-    with open(file_path, 'r') as file:
-        address_list = file.readlines()
+    with open(file_path, 'rb') as file:
+        with mmap.mmap(file.fileno(), 0, access=mmap.ACCESS_READ) as mmapped_file:
+            num_lines = 0
+            while True:
+                line = mmapped_file.readline()
+                if not line:
+                    break
+                num_lines += 1
+                address_set.add(line.decode().strip())  # Decode from bytes to string and strip newline
+            print(f"Opening {file_path} - \033[92m{num_lines:,.0f}\033[0m Addresses")
 
-    num_lines = len(address_list)
-    print(f"Opening {file_path} - \033[92m{num_lines:,.0f}\033[0m Addresses")
-
-    # Process the lines as needed
-    address_set = set(line.strip() for line in address_list)
-
-    database = set()  # Initialize the database here
-
+    # Initialize the database and multiprocessing
+    database = set()
     processes = []
     result_queue = multiprocessing.Queue()
     rng_simulator = MathRandomSimulator()
 
     try:
+        # Create and start processes for searching matches in parallel
         for cpu in range(multiprocessing.cpu_count()):
             process = multiprocessing.Process(target=search_for_match, args=(database, address_set, cpu, result_queue, rng_simulator, file_path))
             processes.append(process)
             process.start()
 
+        # Keep the main process running while the child processes execute
         while True:
             time.sleep(1)
 
     except KeyboardInterrupt:
+        # Handle KeyboardInterrupt to terminate processes gracefully
         print("\nReceived KeyboardInterrupt. Terminating processes.")
+        
+        # Terminate and join each process
         for process in processes:
             process.terminate()
             process.join()
 
+        # Process and write results to a file
         while not result_queue.empty():
             result = result_queue.get()
             with open('winner.txt', 'a') as output_file:
@@ -143,4 +179,3 @@ if __name__ == '__main__':
 
         print("\nAll processes finished.")
         sys.exit(0)
-        
