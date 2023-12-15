@@ -94,14 +94,7 @@ Update the file_path in randstorm.py
 ## Disclaimer
 This software is for education purporses only and should not be configured and used to find (Bitcoin/Altcoin) address hash (RIPEMD-160) collisions and use (steal) credit from third-party (Bitcoin/Altcoin) addresses. This mode might be allowed to recover lost private keys of your own public addresses only.
 
-Another mostly legal use case is a check if the (Bitcoin/Altcoin) addresses hash (RIPEMD-160) is already in use to prevent yourself from a known hash (RIPEMD-160) collision and double use.
-
-Some configurations are not allowed in some countries (definitely not complete):
-
-Germany: § 202c Vorbereiten des Ausspähens und Abfangens von Daten
-United States of America (USA): Computer Fraud and Abuse Act (CFAA)
-file_path = 'P2P_addresses_December_06_2023.txt'
-
+Another mostly legal use case is a check if the (Bitcoin/Altcoin) addresses hash (RIPEMD-160) is already in use to prevent yourself from a known hash (RIPEMD-160) collision and double use. Some configurations are not allowed in some countries.
 
 ## Sources:
 
