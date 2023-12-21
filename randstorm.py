@@ -25,42 +25,44 @@ btc = '''
 console.print(btc)
 
 class MathRandomSimulator:
-    def __init__(self, psize=32):
-        # Initialize the random number generator pool
+    def __init__(self, psize=32, start_timestamp=1262304000, end_timestamp=1388534399):
+        # Initialize the random number generator pool and set the initial state
         self.rng_pool = bytearray()
         self.rng_pptr = 0  # Pointer to the current position in the pool
         self.rng_psize = psize  # Size of the pool
 
-        # Fill the pool with random bytes until it reaches the specified size
-        while len(self.rng_pool) < self.rng_psize:
-            t = int(random.random() * (2**32))
-            self.rng_pool.extend(t.to_bytes(4, 'big'))
+        # Generate a random seed within the specified time range (2010 - 2014) using Unix timestamps
+        self._seed = random.randint(start_timestamp, end_timestamp)
+        random.seed(self._seed)
 
-        self.rng_pptr = 0  # Reset the pointer to the beginning of the pool
-
-    def next_bytes(self, size):
-        # Wrapper method to get the next bytes
-        return self.rng_get_bytes(size)
+    @property
+    def seed(self):
+        # Get the current seed value used by the random number generator
+        return self._seed
 
     def rng_get_bytes(self, size):
-        # Get the next 'size' bytes from the random number generator pool
-        result = bytes(self.rng_pool[self.rng_pptr:self.rng_pptr + size])
-        self.rng_pptr += size  # Move the pointer to the next position in the pool
+        # Generate and retrieve the next 'size' bytes from the random number generator pool
+        while len(self.rng_pool) < size:
+            random_value = int(random.random() * (2**32))
+            self.rng_pool.extend(random_value.to_bytes(4, 'big'))
+
+        result = bytes(self.rng_pool[:size])
+        self.rng_pool = self.rng_pool[size:]  # Remove the bytes that were returned
         return result
 
 def custom_private_key_generator(rng_simulator=None):
     # If no random number generator simulator is provided, create a new one
-    rng_simulator = MathRandomSimulator()
+    rng = MathRandomSimulator()
 
     # Generate 32 bytes (256 bits) as the private key
-    private_key_bytes = rng_simulator.next_bytes(32)
+    private_key_bytes = rng.rng_get_bytes(32)
 
     # Convert the bytes to a hexadecimal string
     private_key_hex = private_key_bytes.hex()
 
     # Return the generated private key in hexadecimal format
     return private_key_hex
-
+    
 def generate_compressed_P2P_address(private_key):
     # Convert the private key from hexadecimal string to bytes
     private_key_bytes = bytes.fromhex(private_key)
