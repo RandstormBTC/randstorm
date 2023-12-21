@@ -6,7 +6,7 @@ There was an issue with BitcoinJS due to the absence of `window.crypto.random` i
 
 Using `Math.random()` for cryptographic key generation should never be done. However, during the 2011-2015 timeframe, `Math.random()` was used on all major browsers to generate private keys.
 
-![Project Image](SecureRandom.png)
+![Project Image](SecureRandomFunction.png)
 
 This function generates a Random Private Key using the python equivalent to SecureRandom() in JSBN javascript library with Math.random(). 
 
