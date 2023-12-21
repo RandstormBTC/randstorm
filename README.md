@@ -8,34 +8,36 @@ Using `Math.random()` for cryptographic key generation should never be done. How
 
 ![Project Image](SecureRandomFunction.png)
 
-This function generates a Random Private Key using the python equivalent to SecureRandom() in JSBN javascript library with Math.random(). 
+This function generates a Random Private Key using the python equivalent to SecureRandom() in BitcoinJS-lib v0.1.3 javascript library with Math.random().
+
+A random seed from 2012 - 2014 is generated and used to seed the function. 
 
 ```python
 class MathRandomSimulator:
-    def __init__(self, psize=32):
+    def __init__(self, psize=32, start_timestamp=1262304000, end_timestamp=1388534399):
+        # Initialize the random number generator pool and set the initial state
         self.rng_pool = bytearray()
-        self.rng_pptr = 0
-        self.rng_psize = psize
+        self.rng_pptr = 0  # Pointer to the current position in the pool
+        self.rng_psize = psize  # Size of the pool
 
-        while len(self.rng_pool) < self.rng_psize:
-            t = int(random.random() * (2**32))
-            self.rng_pool.extend(t.to_bytes(4, 'big'))
+        # Generate a random seed within the specified time range (2010 - 2014) using Unix timestamps
+        self._seed = random.randint(start_timestamp, end_timestamp)
+        random.seed(self._seed)
 
-        self.rng_pptr = 0
-
-    def next_bytes(self, size):
-        return self.rng_get_bytes(size)
+    @property
+    def seed(self):
+        # Get the current seed value used by the random number generator
+        return self._seed
 
     def rng_get_bytes(self, size):
-        result = bytes(self.rng_pool[self.rng_pptr:self.rng_pptr + size])
-        self.rng_pptr += size
-        return result
+        # Generate and retrieve the next 'size' bytes from the random number generator pool
+        while len(self.rng_pool) < size:
+            random_value = int(random.random() * (2**32))
+            self.rng_pool.extend(random_value.to_bytes(4, 'big'))
 
-def custom_private_key_generator(rng_simulator=None):
-    rng_simulator = MathRandomSimulator()
-    private_key_bytes = rng_simulator.next_bytes(32)
-    private_key_hex = private_key_bytes.hex()
-    return private_key_hex
+        result = bytes(self.rng_pool[:size])
+        self.rng_pool = self.rng_pool[size:]  # Remove the bytes that were returned
+        return result
 
 ```
 The HEX string is created with MathRandomSimulator and becuase this algorithm is less secure, it is able to generate keys faster. 
