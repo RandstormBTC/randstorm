@@ -40,9 +40,9 @@ class MathRandomSimulator:
         return result
 
 ```
-A random seed from 2010 - 2014 is generated and used to seed the function. 
+MathRandomSimulator generates a random seed from 2010 - 2014.
 
-The HEX string is created with MathRandomSimulator and becuase this algorithm is less secure, it is able to generate keys faster. 
+Becuase this algorithm is less secure, it is able to generate keys faster. 
 
 With 6 CPU cores this function generates ~ 1,000,000 Bitcoin HEX private keys / second. 
 
