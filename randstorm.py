@@ -105,8 +105,8 @@ def search_for_match(database, address_set, process_id, result_queue, rng_simula
         with total_keys_generated.get_lock():
             total_keys_generated.value += 1
 
-        # Print every 100,000 keys
-        if iteration % 100000 == 0:
+        # Print every 10,000 keys
+        if iteration % 10000 == 0:
             current_time = time.time()
             elapsed_time = current_time - start_time
 
