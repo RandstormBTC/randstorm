@@ -8,9 +8,9 @@ Using `Math.random()` for cryptographic key generation should never be done. How
 
 ![Project Image](SecureRandomFunction.png)
 
-This function generates a Random Private Key using the python equivalent to SecureRandom() in BitcoinJS-lib v0.1.3 javascript library with Math.random(). The SecureRandom() uses rng_seed_time() to seed the RNG. This is the [Unix epoch time](https://www.epochconverter.com/) for the time the wallet was created. However, knowing the exact second the wallet was created is not so easy. 
+This function generates a Random Private Key using the python equivalent to SecureRandom() in BitcoinJS-lib v0.1.3 javascript library with Math.random(). The SecureRandom() uses rng_seed_time() to seed the RNG. This is the [Unix epoch time](https://www.epochconverter.com/) for the time the wallet was created. 
 
-Looking at when the first transation was made on the blockchain, we can take a guess at when the wallet was created. But For each second in the day there are 2^32 different seeds or ~ 4 Billion combinations of private key coombinations. 
+However, knowing the exact second the wallet was created is not so easy. Looking at when the first transation was made on the blockchain, we can take a guess at when the wallet was created. But For each second in the day there are 2^32 different seeds or ~ 4 Billion combinations of private key coombinations. 
 
 ```python
 class MathRandomSimulator:
