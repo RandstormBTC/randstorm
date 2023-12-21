@@ -143,7 +143,7 @@ if __name__ == '__main__':
                 if not line:
                     break
                 num_lines += 1
-                address_set.add(line.decode().strip())  # Decode from bytes to string and strip newline
+                address_set.add(line.strip()) 
             print(f"Opening {file_path} - \033[92m{num_lines:,.0f}\033[0m Addresses")
 
     # Initialize the database and multiprocessing
