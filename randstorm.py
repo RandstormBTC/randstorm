@@ -129,7 +129,7 @@ def search_for_match(database, address_set, process_id, result_queue, rng_simula
 if __name__ == '__main__':
 
     # Define the file path for the memory-mapped file containing Bitcoin addresses
-    file_path = 'P2P_addresses_December_06_2023.txt'
+    file_path = '40,000 dormant bitcoin addresses.txt'
 
     # Initialize the address_set
     address_set = set()
