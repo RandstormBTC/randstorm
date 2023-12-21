@@ -80,7 +80,9 @@ Run On Linux (debian):
 python3 randstorm.py
 ```
 ## Download Addressess 
-You can find an updated List of all funded Bitcoin addresses at:
+You can implement a function to generate Addressess and check the Balance if you want to spend $10,000 in API calls... 
+
+Or you can find an updated List of all funded Bitcoin addresses at:
 
 http://addresses.loyce.club/
 
