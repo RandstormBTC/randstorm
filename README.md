@@ -2,7 +2,7 @@
 <p align="center">
   <img src="RandstormProgram.png" alt="Your Image Description">
 </p>
-Between 2011 and 2015, many exchanges and websites relied on BitcoinJS for Bitcoin wallet generation. The issue was that many browsers didn't use window.crypto.random, which lead to entropy being collected from Math.random(). <br> <br>
+Between 2010 and 2015, many exchanges and websites relied on BitcoinJS for Bitcoin wallet generation. The issue was that many browsers didn't use window.crypto.random, which lead to entropy being collected from Math.random(). <br> <br>
 
 <p align="center">
   <img src="SecureRandomFunction.png" alt="Your Image Description">
@@ -12,7 +12,7 @@ This means that the seed is produced with rng_seed_time(), using Math.random() a
 
 ## Vulnerable Wallets
 
-This vulnerability is only for wallets that were created using [BitcoinJS-lib v0.1.3](https://cdnjs.cloudflare.com/ajax/libs/bitcoinjs-lib/0.1.3/bitcoinjs-min.js) in the 2011-2015 timeframe. Since we can't determine when the wallet was generated or even if the wallet was generated using BitcoinJS-lib v0.1.3, it makes things very difficult. We can examine when the first transaction took place using the blockchain. Using Get_First_Transaction.py we can get the first transaction date using a free API call on [btcscan.org](https://btcscan.org/)
+This vulnerability is only for wallets that were created using [BitcoinJS-lib v0.1.3](https://cdnjs.cloudflare.com/ajax/libs/bitcoinjs-lib/0.1.3/bitcoinjs-min.js) in the 2010-2015 timeframe. Since we can't determine when the wallet was generated or even if the wallet was generated using BitcoinJS-lib v0.1.3, it makes things very difficult. We can examine when the first transaction took place using the blockchain. Using Get_First_Transaction.py we can get the first transaction date using a free API call on [btcscan.org](https://btcscan.org/)
 
 https://btcscan.org/tx/592338770db5cd6344363f77643a2fa2af21de041a756d9d1552205c16dabb37
 
