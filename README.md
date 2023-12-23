@@ -52,6 +52,8 @@ The script generates the private key from the seed, converts it to the Bitcoin a
 
 ## Download & Installing
 
+Download and install the latest version of Python. 
+
 ```bash
 git clone https://github.com/RandstormBTC/randstorm/
 cd randstorm
