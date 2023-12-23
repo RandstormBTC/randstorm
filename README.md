@@ -1,65 +1,45 @@
-![Project Image](screen.png)
+
 
 From 2011 - 2015 many popular crypto exchanges used BitcoinJS to generate private keys. There was an issue with BitcoinJS due to the absence of `window.crypto.random` in many browsers. Consequently, this led to entropy being gathered from `Math.random()`. Using Math.random() for cryptographic key generation should never be done. However, during the 2011-2015 timeframe it was used on all major browsers to generate private keys.
 
 ![Project Image](SecureRandomFunction.png)
 
-This function generates a Random Private Key using the python equivalent to SecureRandom() in BitcoinJS-lib v0.1.3 javascript library with Math.random(). The SecureRandom() uses rng_seed_time() to seed the RNG. This is the [Unix epoch time](https://www.epochconverter.com/) for the time the wallet was created. 
+This means that the Private Key is generated using rng_seed_time() as the only source of entropy. If the address was generated on December 24, 0201, 2:44:56 AM, then using the [Unix epoch time](https://www.epochconverter.com/) we can get the seed = 55793394904000. This is the Unix epoch time in milliseconds. Then using SecureRandom() with the seed to generate the address, we can retrieve the private key.
 
-```python
-class MathRandomSimulator:
-    def __init__(self, psize=32, start_timestamp=1262304000, end_timestamp=1388534399):
-        # Initialize the random number generator pool and set the initial state
-        self.rng_pool = bytearray()
-        self.rng_pptr = 0  # Pointer to the current position in the pool
-        self.rng_psize = psize  # Size of the pool
+## Seed Generation
 
-        # Generate a random seed within the specified time range (2010 - 2014) using Unix timestamps
-        self._seed = random.randint(start_timestamp, end_timestamp)
-        random.seed(self._seed)
+Since we can't determine when the address was generated, we can examine when the first transaction took place using the blockchain, using an API call from a website such as blockcypher.com:
 
-    @property
-    def seed(self):
-        # Get the current seed value used by the random number generator
-        return self._seed
+Address: 1NUhcfvRthmvrHf1PAJKe5uEzBGK44ASBD
+First Transaction: 2014-03-17T07:41:22Z
+Current Balance: 1.9999 BTC
 
-    def rng_get_bytes(self, size):
-        # Generate and retrieve the next 'size' bytes from the random number generator pool
-        while len(self.rng_pool) < size:
-            random_value = int(random.random() * (2**32))
-            self.rng_pool.extend(random_value.to_bytes(4, 'big'))
+Convert the date 2014-03-17T07:41:22Z to Unix epoch time in milliseconds: 1395042082000
 
-        result = bytes(self.rng_pool[:size])
-        self.rng_pool = self.rng_pool[size:]  # Remove the bytes that were returned
-        return result
+Now, get the date from whatever time period you want to try before March 3, 2014.
 
-```
-MathRandomSimulator generates a random seed from 2010 - 2014.
+March 1, 2014 = 1393635661000
 
-Becuase this algorithm is less secure, it is able to generate keys faster. 
-
-With 6 CPU cores this function generates ~ 1,000,000 Bitcoin HEX private keys / second. 
-
-Compared to more secure bitcoin libraries, such as secrets and os.urandom which generates keys at less than half the speed.  
+1395042082000 - 1393635661000 = 1.4 Billion Seeds
 
 ## Key Generating and Searching Speed
 
-After the HEX key is generated, the string is converted to a Compressed P2PKH Bitcoin address in thie following format:
+Using the implementation of SecureRandom(), set the seed to March 1, 2014 = 1393635661000 and generate keys incrementally until the date of the first transaction:
 
-<pre>
-    Hex: a47293a192b48f54eec6ba44e5953ca842bd0d50df5ba4a29ff02dd511a43925
-    P2P: 1KM7gf1PF1Ymg6heiDnQDqvT4wcYwGjAgM
-</pre>
+Seed: 1310691661000 Hex: 6ad2d763712eae6428e2922d7181f92fb70d0e564d1dd38dd0aa9b34b844c0cb P2PKH: 1JbryLqejpB17zLDNspRyJwjL5rjXW7gyw
+Seed: 1310691661001 Hex: fb6ad847a48da87b332b565b548347078a1b9890b9c352a4d9993ae09c189fa6 P2PKH: 1273EG6iByUWoDY8PrCBEhJsEBLEzk1rEi
+Seed: 1310691661002 Hex: 126a2214040a5e6ef26902b4f6a964af4b82b6ef537e09ea1d2b936dab5af571 P2PKH: 1MyrpGdKhu3ASwU6GWdEGKX3mocWVnVXYV
+Seed: 1310691661003 Hex: b2a6694fbb85a9f199bdfb1599242f12d64b036f56b552d92ac1bfe7b2caf55b P2PKH: 1PuGm9G5JQTxy4XrB2gSwuHGoG3Wv5YtaC
+Seed: 1310691661004 Hex: cb33e1431ad31a2adf9bbc545539a852e3756d5019db617422d18d86b241e8a1 P2PKH: 1H8uFkvWfs4bsy9AkRFy8nhS6bBm1ntkqh
+Seed: 1310691661005 Hex: 691064ed9ea535b84637b34b32e73344464335147847cb6cc9efe573af2cfe10 P2PKH: 1CXE4mTtW1Pk8xqceHxgzyZq3uWCDJCfRz
+Seed: 1310691661006 Hex: 7299f801c3957e33864f3b0f0183bf372792cdae8b8b468fb351d4e6e73fb691 P2PKH: 1GxXoWf2NhG3xrmtMSmWy3cPxvhfULMMAR
+Seed: 1310691661007 Hex: eca44bb50206e39b10d8980332d1fe8ecc994bb87752475f1beba6fc71a030c6 P2PKH: 1DLwkoxdUUPeF8c1hWiLYtkj8DTb7mFUYi
+Seed: 1310691661008 Hex: e7ce76437e0a836626b2c6288c608bd8ad803311615d122679fb86d4bba92684 P2PKH: 1FqxzCTL4pRJFUXSxZmefNzevjhvmT5i3n
+Seed: 1310691661009 Hex: ac4a70b3482e19e8acf12d733ee518cc375de32900b3978f88f3ca8def46c170 P2PKH: 1Emb22aih1sP5T55R8AaMJGMDz7rs1117C
+Seed: 1310691661010 Hex: ef212bcf506aff742882c25c1a573565165a437f797c617a841ed8399f54f108 P2PKH: 1GsJqM7dZ5BqvhyKuaTK3X9zb6smpD3pdu
 
-The P2PKH address generation has been optimized to use the coincurve library for very fast key generation.
+...
 
-The program uses multiprocessing to utilize all avaiable cores.
-
-Addresses to be searched are loaded into RAM using mmap. 
-
-Only the compressed P2PKH is generated, which accounts for the majority of bitcoin wallets. 
-
-With 6 cores it generates ~ 70,000 Keys / second and searches 23,000,000 Addresses / second, or 5.729 billion keys / day.
 
 ## Download & Installing
 
