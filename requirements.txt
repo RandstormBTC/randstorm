@@ -1,9 +1,2 @@
-coincurve==15.0.0
-hashlib
-bech32
-base58
-time
-pycryptodome
-random2
-multiprocessing
-rich==12.8.0
+coincurve==15.0.1
+rich==10.9.0
