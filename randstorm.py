@@ -1,18 +1,13 @@
+import random
+import time
+from multiprocessing import Pool
 import coincurve
 import hashlib
-import bech32
 import base58
-import time
-import os
-import random
-import multiprocessing
-import sys
-import mmap
-from Crypto.Hash import SHA256, RIPEMD160
 from rich.console import Console
 console = Console()
 # =========================================================================================
-btc = '''
+Randstorm = '''
 
 ██████╗░░█████╗░███╗░░██╗██████╗░░██████╗████████╗░█████╗░██████╗░███╗░░░███╗
 ██╔══██╗██╔══██╗████╗░██║██╔══██╗██╔════╝╚══██╔══╝██╔══██╗██╔══██╗████╗░████║
@@ -21,38 +16,36 @@ btc = '''
 ██║░░██║██║░░██║██║░╚███║██████╔╝██████╔╝░░░██║░░░╚█████╔╝██║░░██║██║░╚═╝░██║
 ╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚═════╝░╚═════╝░░░░╚═╝░░░░╚════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝
 '''
-# ============================================================================================
-console.print(btc)
+# =========================================================================================
+console.print(Randstorm)
 
-class MathRandomSimulator:
-    def __init__(self, psize=32, start_timestamp=1262304000, end_timestamp=1388534399):
-        # Initialize the random number generator pool and set the initial state
-        self.rng_pool = bytearray()
-        self.rng_pptr = 0  # Pointer to the current position in the pool
-        self.rng_psize = psize  # Size of the pool
+class SecureRandom:
+    def __init__(self, seed):
+        self.rng_state = None
+        self.rng_pool = []
+        self.rng_pptr = 0
+        self.rng_psize = 32
+        random.seed(seed)
+        for _ in range(self.rng_psize):
+            self.rng_pool.append(random.randint(0, 255))
+        self.rng_pptr = 0
 
-        # Generate a random seed within the specified time range (2010 - 2014) using Unix timestamps
-        self._seed = random.randint(start_timestamp, end_timestamp)
-        random.seed(self._seed)
+    def rng_get_byte(self):
+        if self.rng_pptr >= len(self.rng_pool):
+            self.rng_pptr = 0
+            self.rng_pool = [random.randint(0, 255) for _ in range(self.rng_psize)]
+        byte = self.rng_pool[self.rng_pptr]
+        self.rng_pptr += 1
+        return byte
 
-    @property
-    def seed(self):
-        # Get the current seed value used by the random number generator
-        return self._seed
-
-    def rng_get_bytes(self, size):
-        # Generate and retrieve the next 'size' bytes from the random number generator pool
-        while len(self.rng_pool) < size:
-            random_value = int(random.random() * (2**32))
-            self.rng_pool.extend(random_value.to_bytes(4, 'big'))
-
-        result = bytes(self.rng_pool[:size])
-        self.rng_pool = self.rng_pool[size:]  # Remove the bytes that were returned
+    def rng_get_bytes(self, length):
+        result = bytearray(length)
+        for i in range(length):
+            result[i] = self.rng_get_byte()
         return result
-
 def custom_private_key_generator(rng_simulator=None):
     # If no random number generator simulator is provided, create a new one
-    rng = MathRandomSimulator()
+    rng = SecureRandom()
 
     # Generate 32 bytes (256 bits) as the private key
     private_key_bytes = rng.rng_get_bytes(32)
@@ -62,7 +55,7 @@ def custom_private_key_generator(rng_simulator=None):
 
     # Return the generated private key in hexadecimal format
     return private_key_hex
-    
+
 def generate_compressed_P2P_address(private_key):
     # Convert the private key from hexadecimal string to bytes
     private_key_bytes = bytes.fromhex(private_key)
@@ -84,100 +77,66 @@ def generate_compressed_P2P_address(private_key):
 
     # Return the compressed P2PKH address as a string
     return p2pkh_address.decode()
-    
-total_keys_generated = multiprocessing.Value('i', 0)
 
-def search_for_match(database, address_set, process_id, result_queue, rng_simulator, mmapped_file):
-    global total_keys_generated  # Use the shared variable for keys/sec
+def generate_hex(seed):
+    # Set the total number of keys to generate, adjust as needed
+    hex_keys = 145000000  # 145 million keys for 1 day
+    current_seed = seed
 
-    iteration = 0
-    keys_generated_at_start = total_keys_generated.value
-    start_time = time.time()
+    # Create a secure random number generator
+    secure_rng = SecureRandom(current_seed)
 
-    while True:
-        # Generate Private HEX and public Key
-        private_key = custom_private_key_generator(rng_simulator)
+    for i in range(hex_keys):
+        # Generate a random private key in hexadecimal format
+        random_bytes = secure_rng.rng_get_bytes(32)
+        hex_representation = random_bytes.hex()
+        private_key = hex_representation
+
+        # Generate the compressed P2PKH address from the private key
+        p2pkh_address = generate_compressed_P2P_address(private_key)
+
+        # Check if the generated address matches
+        if p2pkh_address == target_address:
+            print(f"Match found!\nPrivate Key: {private_key}")
+
+            # Append the matched private key to a file
+            with open("matched_private_keys.txt", "a") as file:
+                file.write(f"{private_key}\n")
+
+        current_seed += 1
         
-        # Generate the compressed P2PKH Bitcoin address using the private key
-        compressed_p2pkh_address = generate_compressed_P2P_address(private_key)
+        # Display progress every 10,000 keys
+        if i % 10000 == 0:
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            addresses_per_second = (i + 1) / elapsed_time
 
-        # Increment the total count
-        with total_keys_generated.get_lock():
-            total_keys_generated.value += 1
-
-        # Print every 10,000 keys
-        if iteration % 10000 == 0:
-            current_time = time.time()
-            elapsed_time = current_time - start_time
-
-            keys_generated = total_keys_generated.value - keys_generated_at_start
-            keys_per_second = keys_generated / elapsed_time if elapsed_time > 0 else 0
-
-            print(f"\rGenerated Keys: \033[92m{total_keys_generated.value:,.0f}\033[0m"
-                  f" | Keys/Second: \033[92m{keys_per_second:,.0f}\033[0m", end='', flush=True)
-            
-            # Search for a match in the memory-mapped file
-            if compressed_p2pkh_address in mmapped_file:
-                result_queue.put({
-                    'private_key_hex': private_key,
-                    'address_info': compressed_p2pkh_address,
-                })
-                break
-
-        iteration += 1  # Increment the iteration counter
+            # Print the progress in a single line with color-coded information
+            print(f"\rGenerated \033[93m{i}\033[0m Keys | Speed: \033[93m{addresses_per_second:.2f} Keys/s\033[0m | Current Seed: \033[93m{current_seed}\033[0m", end='', flush=True)
 
 if __name__ == '__main__':
+    # Set the number of parallel processes (cores) to use
+    num_processes = 6
+    
+    target_address = "1NUhcfvRthmvrHf1PAJKe5uEzBGK44ASBD"
 
-    # Define the file path for the memory-mapped file containing Bitcoin addresses
-    file_path = '40,000 dormant bitcoin addresses.txt'
+    # Display the target address at the beginning
+    print(f"Searching for: \033[93m{target_address}\033[0m\n")
 
-    # Initialize the address_set
-    address_set = set()
+    start_time = time.time()
 
-    # Read the entire file into a list of lines
-    with open(file_path, 'rb') as file:
-        with mmap.mmap(file.fileno(), 0, access=mmap.ACCESS_READ) as mmapped_file:
-            num_lines = 0
-            while True:
-                line = mmapped_file.readline()
-                if not line:
-                    break
-                num_lines += 1
-                address_set.add(line.strip()) 
-            print(f"Opening {file_path} - \033[92m{num_lines:,.0f}\033[0m Addresses")
+    # Use multiprocessing.Pool to parallelize the generation of random keys
+    with Pool(num_processes) as pool:
+        # Define the range of seeds for each process, March 1, 2014 = 1393635661000
+        seeds = range(1393635661000, 1393635661000 + num_processes)
 
-    # Initialize the database and multiprocessing
-    database = set()
-    processes = []
-    result_queue = multiprocessing.Queue()
-    rng_simulator = MathRandomSimulator()
+        # Map the generate_hex function to the pool of processes
+        pool.map(generate_hex, seeds)
 
-    try:
-        # Create and start processes for searching matches in parallel
-        for cpu in range(multiprocessing.cpu_count()):
-            process = multiprocessing.Process(target=search_for_match, args=(database, address_set, cpu, result_queue, rng_simulator, file_path))
-            processes.append(process)
-            process.start()
+    # Record the end time and calculate elapsed time
+    end_time = time.time()
+    elapsed_time = end_time - start_time
 
-        # Keep the main process running while the child processes execute
-        while True:
-            time.sleep(1)
-
-    except KeyboardInterrupt:
-        # Handle KeyboardInterrupt to terminate processes gracefully
-        print("\nReceived KeyboardInterrupt. Terminating processes.")
-        
-        # Terminate and join each process
-        for process in processes:
-            process.terminate()
-            process.join()
-
-        # Process and write results to a file
-        while not result_queue.empty():
-            result = result_queue.get()
-            with open('winner.txt', 'a') as output_file:
-                output_file.write(f"HEX: {result['private_key_hex']}\n")
-                output_file.write(f"P2SH Bitcoin Address: {result['p2sh_p2wpkh_address']}\n")
-
-        print("\nAll processes finished.")
-        sys.exit(0)
+    # 1.4 Billion seeds. Change as needed. 
+    hex_keys = 1400000000 * num_processes 
+    addresses_per_second = hex_keys / elapsed_time
