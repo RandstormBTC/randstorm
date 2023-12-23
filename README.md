@@ -43,6 +43,9 @@ Seed: 1310691661001 <br>
 Hex: fb6ad847a48da87b332b565b548347078a1b9890b9c352a4d9993ae09c189fa6 <br>
 P2PKH: 1273EG6iByUWoDY8PrCBEhJsEBLEzk1rEi<br>
 ...
+## Check for a Match 
+
+The script generates the private key from the seed, converts it to the Bitcoin address and checks if it matches. 
 
 ## Download & Installing
 
