@@ -8,7 +8,7 @@ Between 2011 and 2015, many exchanges and websites relied on BitcoinJS for Bitco
   <img src="SecureRandomFunction.png" alt="Your Image Description">
 </p>
 
-This means that the seed is produced with rng_seed_time(), using Math.random() as the only source of entropy. If the address was generated on December 24, 0201, 2:44:56 AM, then using the [Unix epoch time](https://www.epochconverter.com/) we can see that the seed = 55793394904000. This is the Unix epoch time in milliseconds. This seed will always create the same private key.
+This means that the seed is produced with rng_seed_time(), using Math.random() as the only source of entropy. If the address was generated on December 24, 2012, 2:44:56 AM, then using the [Unix epoch time](https://www.epochconverter.com/) we can see that the seed = 55793394904000. This is the Unix epoch time in milliseconds. This seed will always create the same private key.
 
 ## Vulnerable Wallets
 
