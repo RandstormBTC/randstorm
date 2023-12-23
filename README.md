@@ -12,7 +12,9 @@ This means that the seed is produced with rng_seed_time(), using Math.random() a
 
 ## Vulnerable Wallets
 
-This vulnerability is only for wallets that were created using [BitcoinJS-lib v0.1.3](https://cdnjs.cloudflare.com/ajax/libs/bitcoinjs-lib/0.1.3/bitcoinjs-min.js) in the 2011-2015 timeframe. Since we can't determine when the wallet was generated, we can examine when the first transaction took place using the blockchain, using Get_First_Transaction.py we can use an API call from a website such as blockcypher.com:
+This vulnerability is only for wallets that were created using [BitcoinJS-lib v0.1.3](https://cdnjs.cloudflare.com/ajax/libs/bitcoinjs-lib/0.1.3/bitcoinjs-min.js) in the 2011-2015 timeframe. Since we can't determine when the wallet was generated, we can examine when the first transaction took place using the blockchain, using Get_First_Transaction.py we can get the first transaction date using a free API call on [BitcoinJS-lib v0.1.3](https://btcscan.org/)
+
+https://btcscan.org/tx/592338770db5cd6344363f77643a2fa2af21de041a756d9d1552205c16dabb37
 
 ```bash
 Address: 1NUhcfvRthmvrHf1PAJKe5uEzBGK44ASBD
