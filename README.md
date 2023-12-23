@@ -10,10 +10,11 @@ This means that the Private Key is generated using rng_seed_time() as the only s
 
 Since we can't determine when the address was generated, we can examine when the first transaction took place using the blockchain, using an API call from a website such as blockcypher.com:
 
-*Address: 1NUhcfvRthmvrHf1PAJKe5uEzBGK44ASBD
+```bash
+Address: 1NUhcfvRthmvrHf1PAJKe5uEzBGK44ASBD
 First Transaction: 2014-03-17T07:41:22Z
-Current Balance: 1.9999 BTC*
-
+Current Balance: 1.9999 BTC
+```
 Convert the date 2014-03-17T07:41:22Z to Unix epoch time in milliseconds: 1395042082000
 
 Now, get the date from whatever time period you want to try before March 3, 2014.
