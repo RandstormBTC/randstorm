@@ -80,7 +80,7 @@ def generate_compressed_P2P_address(private_key):
 
 def generate_hex(seed):
     # Set the total number of keys to generate, adjust as needed
-    hex_keys = 145000000  # 145 million keys for 1 day
+    hex_keys = 1400000000  # 145 million keys for 1 day
     current_seed = seed
 
     # Create a secure random number generator
