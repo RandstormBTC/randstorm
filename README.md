@@ -10,9 +10,9 @@ From 2011 - 2015 many popular exchanges and websites used BitcoinJS to generate 
 
 This means that the Private Key is generated using rng_seed_time() as the only source of entropy. If the address was generated on December 24, 0201, 2:44:56 AM, then using the [Unix epoch time](https://www.epochconverter.com/) we can see that the seed = 55793394904000. This is the Unix epoch time in milliseconds. Then using SecureRandom() with the seed to generate the address, we can retrieve the private key.
 
-## Seed Generation
+## Vulernable Wallets
 
-Since we can't determine when the address was generated, we can examine when the first transaction took place using the blockchain, using an API call from a website such as blockcypher.com:
+THis vulnerability is only for wallets that were created using [BitcoinJS-lib v0.1.3](https://cdnjs.cloudflare.com/ajax/libs/bitcoinjs-lib/0.1.3/bitcoinjs-min.js) in the 2011-2015 timeframe. Since we can't determine when the address was generated, we can examine when the first transaction took place using the blockchain, using an API call from a website such as blockcypher.com:
 
 ```bash
 Address: 1NUhcfvRthmvrHf1PAJKe5uEzBGK44ASBD
@@ -27,7 +27,7 @@ March 1, 2014 = 1393635661000
 
 1395042082000 - 1393635661000 = 1.4 Billion Seeds
 
-## Key Generating and Searching Speed
+## Key Generating 
 
 Using the implementation of SecureRandom(), set the seed to March 1, 2014 = 1393635661000 and generate keys incrementally until the date of the first transaction:
 
@@ -39,7 +39,6 @@ Seed: 1310691661001 <br>
 Hex: fb6ad847a48da87b332b565b548347078a1b9890b9c352a4d9993ae09c189fa6 <br>
 P2PKH: 1273EG6iByUWoDY8PrCBEhJsEBLEzk1rEi<br>
 ...
-
 
 ## Download & Installing
 
@@ -58,13 +57,7 @@ Run On Linux (debian):
 python3 randstorm.py
 ```
 ## Download Addressess 
-You can implement a function to generate Addressess and check the Balance if you want to spend $10,000 in API calls... 
-
-Here is a good list: 
-
-[42,000 dormant bitcoin addresses](https://steemit.com/dormant/@rogerripple/42-000-dormant-bitcoin-addresses)
-
-Or you can find an updated List of all funded Bitcoin addresses at:
+All funded Bitcoin addresses can be downloaded at:
 
 http://addresses.loyce.club/
 
