@@ -12,7 +12,7 @@ This means that the Private Key is generated using rng_seed_time() as the only s
 
 ## Vulnerable Wallets
 
-This vulnerability is only for wallets that were created using [BitcoinJS-lib v0.1.3](https://cdnjs.cloudflare.com/ajax/libs/bitcoinjs-lib/0.1.3/bitcoinjs-min.js) in the 2011-2015 timeframe. Since we can't determine when the wallet was generated, we can examine when the first transaction took place using the blockchain, using an API call from a website such as blockcypher.com:
+This vulnerability is only for wallets that were created using [BitcoinJS-lib v0.1.3](https://cdnjs.cloudflare.com/ajax/libs/bitcoinjs-lib/0.1.3/bitcoinjs-min.js) in the 2011-2015 timeframe. Since we can't determine when the wallet was generated, we can examine when the first transaction took place using the blockchain, using Get_First_Transaction.py we can use an API call from a website such as blockcypher.com:
 
 ```bash
 Address: 1NUhcfvRthmvrHf1PAJKe5uEzBGK44ASBD
