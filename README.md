@@ -21,8 +21,11 @@ Address: 1NUhcfvRthmvrHf1PAJKe5uEzBGK44ASBD
 First Transaction: 2014-03-16 23:48:51 GMT -7
 Current Balance: 1.9999 BTC
 ```
-Convert the date 2014-03-16 23:48:51 GMT -7 to Unix epoch time in linux with command: date -d "2014-03-16 23:48:51 GMT -7" +"%s" | awk '{print $1 * 1000}'
+Convert the date 2014-03-16 23:48:51 GMT -7 to Unix epoch time in linux with command:
 
+```bash
+date -d "2014-03-16 23:48:51 GMT -7" +"%s" | awk '{print $1 * 1000}'
+```
 1395038931000
 
 Now, get the date from whatever time period you want to try before March 3, 2014.
