@@ -27,7 +27,7 @@ March 1, 2014 = 1393635661000
 
 1395042082000 - 1393635661000 = 1.4 Billion Seeds
 
-## Key Generating 
+## Generate Seeds
 
 Using the implementation of SecureRandom(), set the seed to March 1, 2014 = 1393635661000 and generate keys incrementally until the date of the first transaction:
 
