@@ -8,7 +8,7 @@ From 2011 - 2015 many popular exchanges and websites used BitcoinJS to generate 
   <img src="SecureRandomFunction.png" alt="Your Image Description">
 </p>
 
-This means that the Private Key is generated using rng_seed_time() as the only source of entropy. If the address was generated on December 24, 0201, 2:44:56 AM, then using the [Unix epoch time](https://www.epochconverter.com/) we can see that the seed = 55793394904000. This is the Unix epoch time in milliseconds. Then using SecureRandom() with the seed to generate the address, we can retrieve the private key.
+This means that the Private Key is generated using rng_seed_time() as the only source of entropy. If the address was generated on December 24, 0201, 2:44:56 AM, then using the [Unix epoch time](https://www.epochconverter.com/) we can see that the seed = 55793394904000. This is the Unix epoch time in milliseconds.
 
 ## Vulnerable Wallets
 
