@@ -10,7 +10,7 @@ From 2011 - 2015 many popular exchanges and websites used BitcoinJS to generate 
 
 This means that the Private Key is generated using rng_seed_time() as the only source of entropy. If the address was generated on December 24, 0201, 2:44:56 AM, then using the [Unix epoch time](https://www.epochconverter.com/) we can see that the seed = 55793394904000. This is the Unix epoch time in milliseconds. Then using SecureRandom() with the seed to generate the address, we can retrieve the private key.
 
-## Vulernable Wallets
+## Vulnerable Wallets
 
 This vulnerability is only for wallets that were created using [BitcoinJS-lib v0.1.3](https://cdnjs.cloudflare.com/ajax/libs/bitcoinjs-lib/0.1.3/bitcoinjs-min.js) in the 2011-2015 timeframe. Since we can't determine when the wallet was generated, we can examine when the first transaction took place using the blockchain, using an API call from a website such as blockcypher.com:
 
