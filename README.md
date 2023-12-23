@@ -27,13 +27,13 @@ March 1, 2014 = 1393635661000
 
 Using the implementation of SecureRandom(), set the seed to March 1, 2014 = 1393635661000 and generate keys incrementally until the date of the first transaction:
 
-Seed: 1310691661000 
-Hex: 6ad2d763712eae6428e2922d7181f92fb70d0e564d1dd38dd0aa9b34b844c0cb 
-P2PKH: 1JbryLqejpB17zLDNspRyJwjL5rjXW7gyw
+Seed: 1310691661000 <br>
+Hex: 6ad2d763712eae6428e2922d7181f92fb70d0e564d1dd38dd0aa9b34b844c0cb <br>
+P2PKH: 1JbryLqejpB17zLDNspRyJwjL5rjXW7gyw<br>
 
-Seed: 1310691661001 
-Hex: fb6ad847a48da87b332b565b548347078a1b9890b9c352a4d9993ae09c189fa6 
-P2PKH: 1273EG6iByUWoDY8PrCBEhJsEBLEzk1rEi
+Seed: 1310691661001 <br>
+Hex: fb6ad847a48da87b332b565b548347078a1b9890b9c352a4d9993ae09c189fa6 <br>
+P2PKH: 1273EG6iByUWoDY8PrCBEhJsEBLEzk1rEi<br>
 ...
 
 
