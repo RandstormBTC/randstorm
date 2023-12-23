@@ -2,7 +2,7 @@
 <p align="center">
   <img src="RandstormProgram.png" alt="Your Image Description">
 </p>
-Between 2010 and 2015, many exchanges and websites relied on BitcoinJS-lib v0.1.3 for Bitcoin wallet generation. The issue was that many browsers didn't use window.crypto.random, which lead to entropy being collected from Math.random(). <br><br><br>
+Between 2010 and 2015, many exchanges and websites relied on BitcoinJS-lib v0.1.3 for Bitcoin wallet generation. The issue was that many browsers didn't use window.crypto.random, which lead to entropy being collected from Math.random(). <br><br>
 
 <p align="center">
   <img src="SecureRandomFunction.png" alt="Your Image Description">
