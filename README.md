@@ -18,10 +18,12 @@ https://btcscan.org/tx/592338770db5cd6344363f77643a2fa2af21de041a756d9d1552205c1
 
 ```bash
 Address: 1NUhcfvRthmvrHf1PAJKe5uEzBGK44ASBD
-First Transaction: 2014-03-17T07:41:22Z
+First Transaction: 2014-03-16 23:48:51 GMT -7
 Current Balance: 1.9999 BTC
 ```
-Convert the date 2014-03-17T07:41:22Z to Unix epoch time in milliseconds: 1395042082000
+Convert the date 2014-03-16 23:48:51 GMT -7 to Unix epoch time in linus with command: date -d "2014-03-16 23:48:51 GMT -7" +"%s" | awk '{print $1 * 1000}'
+
+1395038931000
 
 Now, get the date from whatever time period you want to try before March 3, 2014.
 
