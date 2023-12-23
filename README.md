@@ -5,10 +5,10 @@
 Between 2010 and 2015, many exchanges and websites relied on BitcoinJS-lib v0.1.3 for Bitcoin wallet generation. The issue was that many browsers didn't use window.crypto.random, which lead to entropy being collected from Math.random(). <br><br>
 
 <p align="center">
-  <img src="SecureRandomFunction.png" alt="Your Image Description">
+  <img src="secure_random.png" alt="Your Image Description">
 </p>
 
-This means that the seed is produced with rng_seed_time(), using Math.random() as the only source of entropy. If the address was generated on December 24, 2012, 2:44:56 AM, then using the [Unix epoch time](https://www.epochconverter.com/) we can see that the seed = 55793394904000. This is the Unix epoch time in milliseconds. This seed will always create the same private key.
+In the highlighted code, if the browser is an old Netscape version and supports the window.crypto object, it attempts to use window.crypto.random(32). If the conditions for an old Netscape version or window.crypto support are not met, the code block inside the if statement will be skipped. This means that the seed is produced with rng_seed_time(), using Math.random() as the only source of entropy. If the address was generated on December 24, 2012, 2:44:56 AM, then using the [Unix epoch time](https://www.epochconverter.com/) we can see that the seed = 55793394904000. This is the Unix epoch time in milliseconds. This seed will always create the same private key.
 
 ## Vulnerable Wallets
 
