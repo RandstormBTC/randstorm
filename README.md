@@ -73,6 +73,10 @@ This software is for education purporses only and should not be configured and u
 
 Another mostly legal use case is a check if the (Bitcoin/Altcoin) addresses hash (RIPEMD-160) is already in use to prevent yourself from a known hash (RIPEMD-160) collision and double use. Some configurations are not allowed in some countries.
 
+## Questions and Comments
+
+Please feel free to share any questions. This is a work in progress and replicating the exact SecureRandom() function in python from Javascript has not been very easy. There still may be some issues...
+
 ## Sources:
 
  <https://www.unciphered.com/blog/randstorm-you-cant-patch-a-house-of-cards>
