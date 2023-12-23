@@ -1,8 +1,8 @@
-![Project Image](RandstormProgram.png)
 
+<p align="center">
+  <img src="RandstormProgram.png" alt="Your Image Description">
+</p>
 From 2011 - 2015 many popular exchanges and websites used BitcoinJS to generate Bitcoin wallets. There was an issue with BitcoinJS due to the absence of `window.crypto.random` in many browsers. Consequently, this led to entropy being gathered from `Math.random()`. Using Math.random() for cryptographic key generation should never be done. However, during the 2011-2015 timeframe it was used on all major browsers to generate private keys.
-
-![Project Image](SecureRandomFunction.png)
 
 <p align="center">
   <img src="SecureRandomFunction.png" alt="Your Image Description">
