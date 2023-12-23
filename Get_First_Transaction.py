@@ -1,44 +1,52 @@
 import requests
+from datetime import datetime
 
-def get_first_transaction_info(api_key, address, output_file):
-    api_url = f'https://api.blockcypher.com/v1/btc/main/addrs/{address}/full?limit=1&token={api_key}'
+def get_first_transaction(wallet_address):
+    # Construct the URL for getting transaction history for the specified address
+    url = f'https://btcscan.org/api/address/{wallet_address}/txs/chain'
 
-    try:
-        response = requests.get(api_url)
-        data = response.json()
+    # Make the GET request to the API
+    response = requests.get(url)
 
-        # Check if the request was successful (status code 200)
-        if response.status_code == 200 and 'txs' in data and data['txs']:
-            transaction = data['txs'][0]
-            output = f"Address: {address}\n"
-            output += f"First Transaction: {transaction.get('received', 'N/A')}\n"
+    # Check if the request was successful (status code 200)
+    if response.status_code == 200:
+        # Parse the JSON response
+        transactions = response.json()
 
-            # Display current balance in BTC
-            current_balance_satoshis = data['balance']
-            current_balance_btc = current_balance_satoshis / 100000000  # Convert satoshis to BTC
-            output += f"Current Balance: {current_balance_btc} BTC\n\n"
-
-            with open(output_file, 'a') as file:
-                file.write(output)
-                print(f"Output for {address} written to {output_file}")
+        # Check if there are any transactions
+        if transactions:
+            # Retrieve information about the first transaction
+            first_transaction = transactions[0]
+            return first_transaction
         else:
-            print(f"No transactions found for the given address: {address}")
-    except requests.exceptions.RequestException as e:
-        print(f"Error: {e}")
+            return None
+    else:
+        # Print an error message if the request was not successful
+        print(f"Error: {response.status_code}, {response.text}")
+        return None
 
-def process_addresses(api_key, addresses_file, output_file):
-    try:
-        with open(addresses_file, 'r') as file:
-            addresses = file.read().splitlines()
+def get_date_from_block_time(block_time):
+    # Convert block time (Unix timestamp) to a human-readable date
+    return datetime.utcfromtimestamp(block_time).strftime('%Y-%m-%d %H:%M:%S UTC')
 
-        for address in addresses:
-            get_first_transaction_info(api_key, address, output_file)
+def process_addresses(input_file, output_file):
+    with open(input_file, 'r') as f:
+        addresses = f.read().splitlines()
 
-    except FileNotFoundError:
-        print(f"Error: The file '{addresses_file}' was not found.")
+    for wallet_address in addresses:
+        first_transaction_info = get_first_transaction(wallet_address)
 
-# Replace 'your_addresses.txt', 'your_output.txt', and 'your_api_key_here' with the actual file paths and API key you want to use
-addresses_file_path = 'addresses_file_path.txt'
-output_file_path = 'output_file_path.txt'
-api_key = 'api_key'
-process_addresses(api_key, addresses_file_path, output_file_path)
+        # Write the information to the output file in real-time
+        with open(output_file, 'a') as output:
+            output.write(f"{wallet_address}\n")
+            if first_transaction_info:
+                output.write(f"{get_date_from_block_time(first_transaction_info['status']['block_time'])}\n\n")
+            else:
+                output.write("No transactions found for the specified wallet.\n")
+
+            # Flush the output buffer to write to the file in real-time
+            output.flush()
+
+if __name__ == "__main__":
+    
+    process_addresses('List_of_wallets.txt', 'Output_BTC_TX_Date.txt')
