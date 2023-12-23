@@ -77,6 +77,10 @@ Another mostly legal use case is a check if the (Bitcoin/Altcoin) addresses hash
 
 Please feel free to share any questions. This is a work in progress and replicating the exact SecureRandom() function in python from Javascript has not been very easy. There still may be some issues...
 
+## Contributors 
+
+Special thanks to ChatGPT and DeepSeek Coder for the help. 
+
 ## Sources:
 
  <https://www.unciphered.com/blog/randstorm-you-cant-patch-a-house-of-cards>
