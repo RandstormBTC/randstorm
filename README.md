@@ -14,7 +14,7 @@ In the highlighted code, if the browser is an old Netscape version and supports 
 
 This is an example of the bitcoinjs-lib browser implementation used. Many of the wallets were generated like this, without additional passwords: 
 
-```bash
+ ```js
 key = new Bitcoin.ECKey()
 
 // Print your private key (a hex string)
@@ -24,7 +24,7 @@ console.log(key.toString())
 // Print your public key (defaults to a Bitcoin address)
 console.log(key.getPub().getAddress())
 // => 14bZ7YWde4KdRb5YN7GYkToz3EHVCvRxkF
-```
+ ```
 
 ## Vulnerable Wallets
 
