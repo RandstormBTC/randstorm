@@ -35,7 +35,6 @@ Address: 1NUhcfvRthmvrHf1PAJKe5uEzBGK44ASBD
 First Transaction: 2014-03-16 23:48:51 GMT -7
 Current Balance: 1.9999 BTC
 ```
-https://btcscan.org/tx/592338770db5cd6344363f77643a2fa2af21de041a756d9d1552205c16dabb37
 Convert the date 2014-03-16 23:48:51 GMT -7 to Unix epoch time in linux with command:
 
 ```bash
