@@ -8,7 +8,7 @@ Between 2010 and 2015, many exchanges and websites relied on BitcoinJS-lib v0.1.
   <img src="secure_random.png" alt="Your Image Description">
 </p>
 
-The code inside the if block will only be executed if all three conditions are true. If you aren't using an old version of Netscape, then the code block will be skipped. This means that the seed is produced with rng_seed_time(), using Math.random() as the only source of entropy. 
+The code inside the if block will only be executed if all three conditions are true. If you aren't using an old version of Netscape, then the code block will be skipped. As of 2011, most people were using more modern browsers like Internet Explorer, Firefox, Google Chrome, Safari, or Opera. This means that the random number generator was seeded using rng_seed_time() with Math.random() as the only source of entropy. 
 
 ## Generating a Bitcoin address
 
