@@ -30,13 +30,12 @@ console.log(key.getPub().getAddress())
 
 This vulnerability is only for wallets that were created using [BitcoinJS-lib v0.1.3](https://github.com/bitcoinjs/bitcoinjs-lib/releases/tag/0.1.3). Since we can't determine when the wallet was generated or even if the wallet was generated using BitcoinJS-lib v0.1.3, it makes things very difficult. We can examine when the first transaction took place using the blockchain. Using Get_First_Transaction.py we can get the first transaction date using a free API call on [btcscan.org](https://btcscan.org/). If the address was generated on December 24, 2012, 2:44:56 AM, then using the [Unix epoch time](https://www.epochconverter.com/) we can see that the seed = 55793394904000. This is the Unix epoch time in milliseconds. This seed will always create the same private key.
 
-https://btcscan.org/tx/592338770db5cd6344363f77643a2fa2af21de041a756d9d1552205c16dabb37
-
 ```bash
 Address: 1NUhcfvRthmvrHf1PAJKe5uEzBGK44ASBD
 First Transaction: 2014-03-16 23:48:51 GMT -7
 Current Balance: 1.9999 BTC
 ```
+https://btcscan.org/tx/592338770db5cd6344363f77643a2fa2af21de041a756d9d1552205c16dabb37
 Convert the date 2014-03-16 23:48:51 GMT -7 to Unix epoch time in linux with command:
 
 ```bash
