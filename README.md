@@ -10,6 +10,22 @@ Between 2010 and 2015, many exchanges and websites relied on BitcoinJS-lib v0.1.
 
 In the highlighted code, if the browser is an old Netscape version and supports the window.crypto object, it attempts to use window.crypto.random(32). If the conditions for an old Netscape version or window.crypto support are not met, the code block inside the if statement will be skipped. This means that the seed is produced with rng_seed_time(), using Math.random() as the only source of entropy. 
 
+## Generating a Bitcoin address
+
+This is an example of the bitcoinjs-lib browser implementation used. Many of the wallets were generated like this, without additional passwords: 
+
+```bash
+key = new Bitcoin.ECKey()
+
+// Print your private key (a hex string)
+console.log(key.toString())
+// => 8c112cf628362ecf4d482f68af2dbb50c8a2cb90d226215de925417aa9336a48
+
+// Print your public key (defaults to a Bitcoin address)
+console.log(key.getPub().getAddress())
+// => 14bZ7YWde4KdRb5YN7GYkToz3EHVCvRxkF
+```
+
 ## Vulnerable Wallets
 
 This vulnerability is only for wallets that were created using [BitcoinJS-lib v0.1.3](https://github.com/bitcoinjs/bitcoinjs-lib/releases/tag/0.1.3). Since we can't determine when the wallet was generated or even if the wallet was generated using BitcoinJS-lib v0.1.3, it makes things very difficult. We can examine when the first transaction took place using the blockchain. Using Get_First_Transaction.py we can get the first transaction date using a free API call on [btcscan.org](https://btcscan.org/). If the address was generated on December 24, 2012, 2:44:56 AM, then using the [Unix epoch time](https://www.epochconverter.com/) we can see that the seed = 55793394904000. This is the Unix epoch time in milliseconds. This seed will always create the same private key.
