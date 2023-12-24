@@ -8,7 +8,7 @@ Between 2010 and 2015, many exchanges and websites relied on BitcoinJS-lib v0.1.
   <img src="secure_random.png" alt="Your Image Description">
 </p>
 
-In the highlighted code, if the browser is an old Netscape version and supports the window.crypto object, it attempts to use window.crypto.random(32). If the conditions for an old Netscape version or window.crypto support are not met, the code block inside the if statement will be skipped. This means that the seed is produced with rng_seed_time(), using Math.random() as the only source of entropy. 
+The code inside the if block will only be executed if all three conditions are true. If you aren't using an old version of Netscape, then the code block will be skipped. This means that the seed is produced with rng_seed_time(), using Math.random() as the only source of entropy. 
 
 ## Generating a Bitcoin address
 
