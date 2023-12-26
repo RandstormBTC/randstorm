@@ -31,12 +31,14 @@ Scaled value: 0.5532989501953125 * 65536 ≈ 36222.405517578125 = 36222
 this.pool[this.pptr++] = t >>> 8;  // Store the high byte of the 16-bit value
 this.pool[this.pptr++] = t & 255;  // Store the low byte of the 16-bit value
  ```
-Subsequently, the code separates this 16-bit integer into two 8-bit values (high byte and low byte) using bitwise operations. The line this.pool[this.pptr++] = t >>> 8; stores the high byte of t (right-shifting by 8 bits), and this.pool[this.pptr++] = t & 255; stores the low byte of t (using a bitwise AND operation with 255, which is equivalent to binary 11111111).
+Subsequently, the code separates this 16-bit integer into two 8-bit values (high byte and low byte) using bitwise operations.
 
-To turn the 16-bit integer 36261 into two 8-bit values (high byte and low byte), you can use bitwise operations. In binary, 36261 is represented as 1000110111000101. The high byte is the first 8 bits (10001101), and the low byte is the last 8 bits (11000101).
+Original value: 36222 (16-bit binary representation: 1000110110001110
 
-The high byte (first 8 bits) is 10001101, which is 141 
-The low byte (last 8 bits) is 11000101, which is 197 
+High byte: 0000000010001101 =  13
+Low byte:  000011100011110 =  222
+
+Therefore, for the value 36222, the high byte is 13, and the low byte is 222. These values are then stored in the this.pool.
 
 ##  Math.random() predictability 
 
