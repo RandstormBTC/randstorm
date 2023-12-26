@@ -49,7 +49,7 @@ Math.random()
 0.6684147152303501
 ```
 
-[Alt Text](path/to/GenerateValues.png)
+<img src="GenerateValues.png" alt="GenerateValues">
 
 ## Vulnerable Wallets
 
