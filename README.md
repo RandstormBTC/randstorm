@@ -113,12 +113,9 @@ Special thanks to ChatGPT and DeepSeek Coder for the help.
 
  <https://medium.com/@betable/tifu-by-using-math-random-f1c308c4fd9d>
 
- <https://thehackernews.com/2023/11/randstorm-exploit-bitcoin-wallets.html>
+<https://security.stackexchange.com/questions/84906/predicting-math-random-numbers>
 
- <https://cointelegraph.com/news/randstorm-crypto-wallet-vulnerability-bitcoin-dogecoin-litecoin-zcash>
-
- <https://www.kaspersky.com/blog/vulnerability-in-hot-cryptowallets-from-2011-2015/49943/>
-
+<https://lwn.net/Articles/666407/>
 
 ## Donate:
 BTC: bc1q2rqz0mzwxdm0umhlllsyd5rt30uh8kswhqcnqp
