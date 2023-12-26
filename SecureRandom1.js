@@ -1,3 +1,5 @@
+// Generates a private key based on Math.random() with 2 slightly different implementations. 
+
 function SecureRandom3() {
 var SEED_TIME_VALUE = 1294200190000;
     this.pool = null;
