@@ -6,11 +6,8 @@ Between 2010 and 2015, many exchanges and websites relied on BitcoinJS-lib v0.1.
 
 The code inside the if block will only be executed if all three conditions are true. If you aren't using an old version of Netscape, then the code block will be skipped. As of 2011, most people were using more modern browsers like Internet Explorer, Firefox, Google Chrome, Safari, or Opera. This means that the random number generator was seeded using rng_seed_time() with Math.random() as the only source of entropy. 
 
-## Generating a Bitcoin address
-I made an HTML file you can run in the browser. It creates private keys with a set seed using the Javascript SecureRandom function found in [rng.js](http://www-cs-students.stanford.edu/~tjw/jsbn/rng.js) 
-
-Currently I am running it in Node.js to test private key collision rates.
-
+##  Math.random() predictability 
+I made an HTML file you can run run with different browsers. It creates private keys with a set seed using the Javascript SecureRandom function found in [rng.js](http://www-cs-students.stanford.edu/~tjw/jsbn/rng.js). More modification will be coming soo. 
 
 <p align="center">
   <a href="https://github.com/RandstormBTC/randstorm/blob/main/SecureRandomGenerator.html">
@@ -18,20 +15,23 @@ Currently I am running it in Node.js to test private key collision rates.
   </a>
 </p>
 
+Another by-product of the research is the ability to predict the next values from
+Math.random(), and to reconstruct previous values from Math.random(), even
+across domains. This jeopardizes client-side password generation schemes
+(google for Javascript password generator, e.g. [28], to get an idea of how
+widespread this practice is; naturally not all entries indexed by Google are
+vulnerable, but probably a large part of them is), and similar applications that
+rely on strong randomness of the Javascript Math.random() facility, or at least on
+the premise of cross-domain non-leakage ([33] discloses a different but related
+security issue in one such product, which uses Javascript’s Math.random for
+session ID).
 
-This is an example of the bitcoinjs-lib browser implementation used. Many of the wallets were generated like this, without additional passwords: 
+Math.random() predictability was demonstrated for:
+• IE (Windows)
+• Firefox (all platforms)
+• Safari (Mac OS/X) 
+https://dl.packetstormsecurity.net/papers/general/Temporary_User_Tracking_in_Major_Browsers.pdf
 
- ```js
-key = new Bitcoin.ECKey()
-
-// Print your private key (a hex string)
-console.log(key.toString())
-// => 8c112cf628362ecf4d482f68af2dbb50c8a2cb90d226215de925417aa9336a48
-
-// Print your public key (defaults to a Bitcoin address)
-console.log(key.getPub().getAddress())
-// => 14bZ7YWde4KdRb5YN7GYkToz3EHVCvRxkF
- ```
 
 ## Vulnerable Wallets
 
