@@ -48,6 +48,9 @@ Math.random()
 Math.random()
 0.6684147152303501
 ```
+
+[Alt Text](path/to/GenerateValues.png)
+
 ## Vulnerable Wallets
 
 This vulnerability is only for wallets that were created using [BitcoinJS-lib v0.1.3](https://github.com/bitcoinjs/bitcoinjs-lib/releases/tag/0.1.3). Since we can't determine when the wallet was generated or even if the wallet was generated using BitcoinJS-lib v0.1.3, it makes things very difficult. 
