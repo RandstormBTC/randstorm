@@ -6,6 +6,7 @@ The code inside the if block will only be executed if all three conditions are t
 
 Using [v8-randomness-predictor](https://github.com/PwnFunction/v8-randomness-predictor) the program uses z3 to predict Math.random values. 
 
+```bash
 Sequence = [0.6297969575631002, 0.6074412953668151, 0.9919811223107806, 0.48870040262493863, 0.4398739265503919]
 
 Next Sequence: 0.3283496320042738
@@ -17,7 +18,7 @@ Next Sequence: 0.37620797979266385
 Updated Sequence: [0.9919811223107806, 0.48870040262493863, 0.4398739265503919, 0.3283496320042738, 0.37620797979266385]
 
 Next Sequence: 0.7982242070609398
-
+```
 ```python
 Array.from(Array(5), Math.random)
 (5) [0.6297969575631002, 0.6074412953668151, 0.9919811223107806, 0.48870040262493863, 0.4398739265503919]
