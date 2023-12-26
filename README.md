@@ -11,9 +11,13 @@ I made a simple HTML file you can load in the browser that creates private keys 
 
 Currently I am running it in Node.js to test private key collision rates.
 
+
 <p align="center">
-  <img src="SecureRandomGen.png" alt="Your Image Description">
+  <a href="https://github.com/RandstormBTC/randstorm/blob/main/SecureRandomGenerator.html">
+    <img src="SecureRandomGen.png" alt="Your Image Description">
+  </a>
 </p>
+
 
 This is an example of the bitcoinjs-lib browser implementation used. Many of the wallets were generated like this, without additional passwords: 
 
