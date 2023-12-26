@@ -24,8 +24,9 @@ The provided JavaScript code enters a loop where it generates random 16-bit valu
 t = Math.floor(65536 * Math.random());
 ```
 Math.random() generates a pseudo-random floating-point number in the range 0 and 1: 0.5532989501953125
-The value 0.5532989501953125 is scaled by 65536 and then rounded down to the nearest integer using Math.floor().
-Output: 36261
+
+Scaled value: 0.5532989501953125 * 65536 ≈ 36222.405517578125 = 36222
+
 ```javascript
 this.pool[this.pptr++] = t >>> 8;  // Store the high byte of the 16-bit value
 this.pool[this.pptr++] = t & 255;  // Store the low byte of the 16-bit value
