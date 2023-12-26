@@ -11,24 +11,32 @@ I made an HTML file you can run run with different browsers. It creates private 
   </a>
 </p>
 
-Another by-product of the research is the ability to predict the next values from
-Math.random(), and to reconstruct previous values from Math.random(), even
-across domains. This jeopardizes client-side password generation schemes
-(google for Javascript password generator, e.g. [28], to get an idea of how
-widespread this practice is; naturally not all entries indexed by Google are
-vulnerable, but probably a large part of them is), and similar applications that
-rely on strong randomness of the Javascript Math.random() facility, or at least on
-the premise of cross-domain non-leakage ([33] discloses a different but related
-security issue in one such product, which uses Javascript’s Math.random for
-session ID).
+Using [v8-randomness-predictor](https://github.com/PwnFunction/v8-randomness-predictor) the program uses z3 to predict Math.random values. 
 
-Math.random() predictability was demonstrated for:
-• IE (Windows)
-• Firefox (all platforms)
-• Safari (Mac OS/X) 
-https://dl.packetstormsecurity.net/papers/general/Temporary_User_Tracking_in_Major_Browsers.pdf
+Sequence = [0.4398739265503919, 0.48870040262493863, 0.9919811223107806, 0.6074412953668151, 0.6297969575631002]
 
+Next Sequence: 0.3283496320042738
 
+Updated Sequence: [0.6074412953668151, 0.9919811223107806, 0.48870040262493863, 0.4398739265503919, 0.3283496320042738]
+
+Next Sequence: 0.37620797979266385
+
+Updated Sequence: [0.9919811223107806, 0.48870040262493863, 0.4398739265503919, 0.3283496320042738, 0.37620797979266385]
+
+Next Sequence: 0.7982242070609398
+
+```python
+Array.from(Array(5), Math.random)
+(5) [0.6297969575631002, 0.6074412953668151, 0.9919811223107806, 0.48870040262493863, 0.4398739265503919]
+Math.random()
+0.3283496320042738
+Math.random()
+0.37620797979266385
+Math.random()
+0.7982242070609398
+Math.random()
+0.6684147152303501
+```
 ## Vulnerable Wallets
 
 This vulnerability is only for wallets that were created using [BitcoinJS-lib v0.1.3](https://github.com/bitcoinjs/bitcoinjs-lib/releases/tag/0.1.3). Since we can't determine when the wallet was generated or even if the wallet was generated using BitcoinJS-lib v0.1.3, it makes things very difficult. 
@@ -118,6 +126,8 @@ Special thanks to ChatGPT and DeepSeek Coder for the help.
 <https://lwn.net/Articles/666407/>
 
 <https://ifsec.blogspot.com/2012/09/of-html5-security-cross-domain.html>
+
+<https://github.com/PwnFunction/v8-randomness-predictor/tree/main>
 
 ## Donate:
 BTC: bc1q2rqz0mzwxdm0umhlllsyd5rt30uh8kswhqcnqp
