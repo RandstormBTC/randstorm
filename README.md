@@ -20,13 +20,16 @@ Between 2010 and 2015, many exchanges and websites relied on BitcoinJS-lib v0.1.
   ```
 The provided JavaScript code enters a loop where it generates random 16-bit values (t) and fills the array by storing the high and low bytes of each 16-bit value consecutively. This process continues until the pool is full. After filling the pool, the pointer is reset to 0, and a function seedTime() is called to further seed the random values based on time. In summary, this code creates and populates a pool of 256 'random' values using a simple algorithm based on random number generation and bitwise operations.
 
-```javascript
-t = Math.floor(65536 * Math.random());
-```
+			```javascript
+			t = Math.floor(65536 * Math.random());
+			```
 Math.random() generates a pseudo-random floating-point number in the range 0 and 1: 0.5532989501953125
 The value 0.5532989501953125 is scaled by 65536 and then rounded down to the nearest integer using Math.floor().
 Output: 36261
-
+```javascript
+			this.pool[this.pptr++] = t >>> 8;  // Store the high byte of the 16-bit value
+			this.pool[this.pptr++] = t & 255;  //
+ ```
 Subsequently, the code separates this 16-bit integer into two 8-bit values (high byte and low byte) using bitwise operations. The line this.pool[this.pptr++] = t >>> 8; stores the high byte of t (right-shifting by 8 bits), and this.pool[this.pptr++] = t & 255; stores the low byte of t (using a bitwise AND operation with 255, which is equivalent to binary 11111111).
 
 To turn the 16-bit integer 36261 into two 8-bit values (high byte and low byte), you can use bitwise operations. In binary, 36261 is represented as 1000110111000101. The high byte is the first 8 bits (10001101), and the low byte is the last 8 bits (11000101).
