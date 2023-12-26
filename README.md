@@ -6,7 +6,7 @@ The code inside the if block will only be executed if all three conditions are t
 
 Using [v8-randomness-predictor](https://github.com/PwnFunction/v8-randomness-predictor) the program uses z3 to predict Math.random values. 
 
-Sequence = [0.4398739265503919, 0.48870040262493863, 0.9919811223107806, 0.6074412953668151, 0.6297969575631002]
+Sequence = [0.6297969575631002, 0.6074412953668151, 0.9919811223107806, 0.48870040262493863, 0.4398739265503919]
 
 Next Sequence: 0.3283496320042738
 
