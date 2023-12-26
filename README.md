@@ -117,5 +117,7 @@ Special thanks to ChatGPT and DeepSeek Coder for the help.
 
 <https://lwn.net/Articles/666407/>
 
+<https://ifsec.blogspot.com/2012/09/of-html5-security-cross-domain.html>
+
 ## Donate:
 BTC: bc1q2rqz0mzwxdm0umhlllsyd5rt30uh8kswhqcnqp
