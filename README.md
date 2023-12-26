@@ -2,6 +2,7 @@ Between 2010 and 2015, many exchanges and websites relied on BitcoinJS-lib v0.1.
 
 ```javascript
 	if (this.pool == null) {  // Check if the pool is not already initialized
+		this.poolSize = 256;
 		this.pool = new Array(this.poolSize);  // Create an array to store random values
 		this.pptr = 0;  // Initialize the pool pointer to 0
 		var t;  // Declare a variable to store temporary random values
