@@ -17,7 +17,7 @@ Between 2010 and 2015, many exchanges and websites relied on BitcoinJS-lib v0.1.
 		this.seedTime();  // Call a function (not provided) to seed the random values based on time
 		}
   ```
-The code inside the if block will only be executed if all three conditions are true. If you aren't using an old version of Netscape, then the code block will be skipped. As of 2011, most people were using more modern browsers like Internet Explorer, Firefox, Google Chrome, Safari, or Opera. This means that the random number generator was seeded using rng_seed_time() with Math.random() as the only source of entropy. 
+The provided JavaScript code initializes a random number generator's internal state. It first checks if the generator's pool is null, and if so, it creates an array to store random values and initializes a pool pointer and a temporary variable. It fills the array with random 16-bit values using a loop, ensuring each value is split into high and low bytes. Finally, it resets the pool pointer to zero and calls a function to seed the random values further based on the current time if the pool was not initialized before. 
 
 ##  Math.random() predictability 
 
