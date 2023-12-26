@@ -18,8 +18,7 @@ Between 2010 and 2015, many exchanges and websites relied on BitcoinJS-lib v0.1.
 		this.seedTime();  // Call a function (not provided) to seed the random values based on time
 		}
   ```
-The provided JavaScript code initializes a random number generator's internal state. It first checks if the generator's pool is null, and if so, it creates an array to store random values and initializes a pool pointer and a temporary variable. It fills the array with random 16-bit values using a loop, ensuring each value is split into high and low bytes. Finally, it resets the pool pointer to zero and calls a function to seed the random values further based on the current time if the pool was not initialized before. 
-
+The provided JavaScript code enters a loop where it generates random 16-bit values (t) and fills the array by storing the high and low bytes of each 16-bit value consecutively. This process continues until the pool is full. After filling the pool, the pointer is reset to 0, and a function seedTime() is called to further seed the random values based on time. In summary, this code creates and populates a pool of 256 'random' values using a simple algorithm based on random number generation and bitwise operations.
 ##  Math.random() predictability 
 
 Using [v8-randomness-predictor](https://github.com/PwnFunction/v8-randomness-predictor) the program uses z3 to predict Math.random values. 
