@@ -168,7 +168,7 @@ for (var k = 0; k < privateKeyBytes3.length; k++) {
 }
 var privateKeyHex3 = Array.from(privateKeyBytes3).map(b => ('0' + b.toString(16)).slice(-2)).join('');
 
-console.log('SecureRandom3:', privateKeyHex3);
+console.log('SecureRandom1:', privateKeyHex3);
 
 // SecureRandom2
 var random2 = new SecureRandom2();
