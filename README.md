@@ -7,7 +7,7 @@ Between 2010 and 2015, many exchanges and websites relied on BitcoinJS-lib v0.1.
 The code inside the if block will only be executed if all three conditions are true. If you aren't using an old version of Netscape, then the code block will be skipped. As of 2011, most people were using more modern browsers like Internet Explorer, Firefox, Google Chrome, Safari, or Opera. This means that the random number generator was seeded using rng_seed_time() with Math.random() as the only source of entropy. 
 
 ## Generating a Bitcoin address
-I made a simple HTML file you can load in the browser that creates private keys with a set seed using the SecureRandom function is found in [rng.js](http://www-cs-students.stanford.edu/~tjw/jsbn/rng.js) 
+I made an HTML file you can run in the browser. It creates private keys with a set seed using the Javascript SecureRandom function found in [rng.js](http://www-cs-students.stanford.edu/~tjw/jsbn/rng.js) 
 
 Currently I am running it in Node.js to test private key collision rates.
 
