@@ -20,9 +20,9 @@ Between 2010 and 2015, many exchanges and websites relied on BitcoinJS-lib v0.1.
   ```
 The provided JavaScript code enters a loop where it generates random 16-bit values (t) and fills the array by storing the high and low bytes of each 16-bit value consecutively. This process continues until the pool is full. After filling the pool, the pointer is reset to 0, and a function seedTime() is called to further seed the random values based on time. In summary, this code creates and populates a pool of 256 'random' values using a simple algorithm based on random number generation and bitwise operations.
 
-			```javascript
+```javascript
 			t = Math.floor(65536 * Math.random());
-			```
+```
 Math.random() generates a pseudo-random floating-point number in the range 0 and 1: 0.5532989501953125
 The value 0.5532989501953125 is scaled by 65536 and then rounded down to the nearest integer using Math.floor().
 Output: 36261
