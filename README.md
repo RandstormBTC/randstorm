@@ -1,5 +1,22 @@
 Between 2010 and 2015, many exchanges and websites relied on BitcoinJS-lib v0.1.3 for Bitcoin wallet generation. The issue was that many browsers didn't use window.crypto.random, which lead to entropy being collected from Math.random(). <br>
 
+```javascript
+	if (this.pool == null) {  // Check if the pool is not already initialized
+		this.pool = new Array(this.poolSize);  // Create an array to store random values
+		this.pptr = 0;  // Initialize the pool pointer to 0
+		var t;  // Declare a variable to store temporary random values
+
+		// Fill the pool with random values
+		while (this.pptr < this.poolSize) {
+			t = Math.floor(65536 * Math.random());  // Generate a random 16-bit value
+			this.pool[this.pptr++] = t >>> 8;  // Store the high byte of the 16-bit value
+			this.pool[this.pptr++] = t & 255;  // Store the low byte of the 16-bit value
+			}
+
+		this.pptr = 0;  // Reset the pool pointer to 0
+		this.seedTime();  // Call a function (not provided) to seed the random values based on time
+		}
+  ```
 The code inside the if block will only be executed if all three conditions are true. If you aren't using an old version of Netscape, then the code block will be skipped. As of 2011, most people were using more modern browsers like Internet Explorer, Firefox, Google Chrome, Safari, or Opera. This means that the random number generator was seeded using rng_seed_time() with Math.random() as the only source of entropy. 
 
 ##  Math.random() predictability 
