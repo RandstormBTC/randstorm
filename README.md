@@ -39,7 +39,7 @@ The low byte (last 8 bits) is 11000101, which is 197
 
 ##  Math.random() predictability 
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=_Iv6fBrcbAM" frameborder="0" allowfullscreen></iframe>
+[![Demo Video](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](ttps://www.youtube.com/watch?v=_Iv6fBrcbAM)
 
 Using [v8-randomness-predictor](https://github.com/PwnFunction/v8-randomness-predictor) the program uses z3 to predict Math.random values. 
 
