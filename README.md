@@ -152,7 +152,7 @@ This is our private key generated using the seed 1395038931000 for current time 
 
 ##  Math.random() predictability 
 
-Using [v8-randomness-predictor](https://github.com/PwnFunction/v8-randomness-predictor) the program uses z3 to predict Math.random values. 
+Using [v8-randomness-predictor](https://github.com/PwnFunction/v8-randomness-predictor) or [v8_rand_buster](https://github.com/d0nutptr/v8_rand_buster/tree/master) to predict Math.random values. 
 
 ```bash
 Sequence = [0.6297969575631002, 0.6074412953668151, 0.9919811223107806, 0.48870040262493863, 0.4398739265503919]
