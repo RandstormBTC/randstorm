@@ -214,33 +214,7 @@ Using the implementation of SecureRandom(), set the seed to March 1, 2014 = 1393
 Seed: 1310691661000 <br>
 Hex: 6ad2d763712eae6428e2922d7181f92fb70d0e564d1dd38dd0aa9b34b844c0cb <br>
 P2PKH: 1JbryLqejpB17zLDNspRyJwjL5rjXW7gyw<br>
-
-Seed: 1310691661001 <br>
-Hex: fb6ad847a48da87b332b565b548347078a1b9890b9c352a4d9993ae09c189fa6 <br>
-P2PKH: 1273EG6iByUWoDY8PrCBEhJsEBLEzk1rEi<br>
 ...
-## Check for a Match 
-
-The script generates the private key from the seed, converts it to the Bitcoin address and checks if it matches. 
-
-## Download & Installing
-
-Download and install the latest version of Python. 
-
-```bash
-git clone https://github.com/RandstormBTC/randstorm/
-cd randstorm
-pip install -r requirements.txt
-```
-
-Run On Windows (cmd / powershell):
-```bash
-python randstorm.py
-```
-Run On Linux (debian):
-```bash
-python3 randstorm.py
-```
 ## Download Addressess 
 All funded Bitcoin addresses can be downloaded at:
 
