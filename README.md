@@ -54,9 +54,10 @@ Current Pool : [
   ... 156 more items
 ]
 ```
-##  XOR
+##  XOR Operations
 
 This function is used to mix the bits of the input integer SEED_TIME into the internal pool array, providing a way to seed the generator or introduce entropy into the system for generating pseudorandom numbers. The XOR operation helps ensure that each bit of the input has an effect on the state of the generator.
+
 ```javascript
 this.seedInt = function (x) {
         this.pool[this.pptr++] ^= x & 255;
@@ -65,6 +66,20 @@ this.seedInt = function (x) {
         this.pool[this.pptr++] ^= (x >> 24) & 255;
         if (this.pptr >= this.poolSize) this.pptr -= this.poolSize;
     };
+```
+```bash
+After XOR... Here's the new pool:  [
+   85,  15,  17, 189, 237, 155, 103,  43, 176,   6, 103,  47,
+  194, 180,  82, 147,  36,  24, 126, 132,  26, 247, 178, 161,
+  102, 171,  42, 173, 137, 121, 101,  29,  19, 107, 112, 132,
+  198,  71,  11,  44, 244, 154,  32,   0,  99, 226,  73, 154,
+  197,  98,  70, 239,  50,  15, 239, 209,  68,  60, 116, 121,
+  146,  13, 195, 112, 222, 166, 167,  66, 220, 156, 178,  51,
+   14, 250, 252,  44, 104,  53, 114, 146,  50,  37, 217, 242,
+  175,  19, 180, 145,  96,  31,  53,  35, 226, 203,  86,  25,
+   69,  51, 207,  30,
+  ... 156 more items
+]
 ```
 
 ##  Math.random() predictability 
