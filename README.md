@@ -69,8 +69,9 @@ Math.random()
 Math.random()
 0.6684147152303501
 ```
+Use The HTML file to see what the output looks like when Math.Random loads the pool and generates a private key. The seedtime is set to a global value. 
 
-<img src="GenerateValues.png" alt="GenerateValues">
+<img src="generateKeys.png" alt="GenerateValues">
 
 ## Vulnerable Wallets
 
