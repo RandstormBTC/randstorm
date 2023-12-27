@@ -1,4 +1,7 @@
+poolSize = 256
+
 Random 16-bit Value: | High Byte | Low Byte |
+
 Byte 1: 33261   237   129
 Byte 3: 41244   28   161
 Byte 5: 24397   77   95
