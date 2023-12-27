@@ -81,6 +81,23 @@ After XORs... New pool:  [
   ... 156 more items
 ]
 ```
+##  Arcfour - RC4 Stream Cipher Encoding 
+
+In order to generate bytes the algorithm uses the pool of 256 values. These values are run through the [Arcfour](https://github.com/kyledrake/coinpunk/blob/master/lib/bitcoinjs/jsbn/prng4.js) cipher to randomize it futher using the seed time. 
+
+```javascript
+    this.getByte = function () {
+        if (this.state == null) {
+            this.seedTime();
+            this.state = this.ArcFour(); // <---- Here is where ArcFour() is called 
+            this.state.init(this.pool);
+            for (this.pptr = 0; this.pptr < this.pool.length; ++this.pptr)
+                this.pool[this.pptr] = 0;
+            this.pptr = 0;
+        }
+        return this.state.next();
+    };
+```
 
 ##  Math.random() predictability 
 
