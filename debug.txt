@@ -492,4 +492,4 @@ t (temporary value): 175
 Result of XOR and indexing: 228
 Generated Random Byte: Decimal -> Hex: 228 -> e4
 
-32 Byte Hex String: edfedf091c8d28d4ac0075f7f3a3897ed151354fca5aadc7021482df4e89b7e4
+Private Key: edfedf091c8d28d4ac0075f7f3a3897ed151354fca5aadc7021482df4e89b7e4
