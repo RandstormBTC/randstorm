@@ -40,9 +40,9 @@ Low byte:  000011100011110 =  222
 
 Therefore, for the value 36222, the high byte is 13, and the low byte is 222. These values are then stored in a pool of 256 values like this: 
 
-
+```bash
 Current Pool : [
-  101, 187,  70, 233, 237, 155, 103,  43, 176,   6, 103,  47,
+  13, 222,  70, 233, 237, 155, 103,  43, 176,   6, 103,  47,
   194, 180,  82, 147,  36,  24, 126, 132,  26, 247, 178, 161,
   102, 171,  42, 173, 137, 121, 101,  29,  19, 107, 112, 132,
   198,  71,  11,  44, 244, 154,  32,   0,  99, 226,  73, 154,
@@ -53,12 +53,19 @@ Current Pool : [
    69,  51, 207,  30,
   ... 156 more items
 ]
+```
+##  XOR
 
-
-
-
-
-
+This function is used to mix the bits of the input integer SEED_TIME into the internal pool array, providing a way to seed the generator or introduce entropy into the system for generating pseudorandom numbers. The XOR operation helps ensure that each bit of the input has an effect on the state of the generator.
+```javascript
+this.seedInt = function (x) {
+        this.pool[this.pptr++] ^= x & 255;
+        this.pool[this.pptr++] ^= (x >> 8) & 255;
+        this.pool[this.pptr++] ^= (x >> 16) & 255;
+        this.pool[this.pptr++] ^= (x >> 24) & 255;
+        if (this.pptr >= this.poolSize) this.pptr -= this.poolSize;
+    };
+```
 
 ##  Math.random() predictability 
 
