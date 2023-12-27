@@ -98,6 +98,7 @@ In order to generate bytes the algorithm uses the pool of 256 values. These valu
         return this.state.next();
     };
 ```
+The seed time is used to randomize the pool. But sice we are using a set seed, for example time = 1395038931000, we can use the seed to decrypt the cypher. 
 
 ##  Math.random() predictability 
 
