@@ -56,7 +56,7 @@ Current Pool : [
 ```
 ##  XOR Operations
 
-This function is used to mix the bits of the input integer SEED_TIME into the internal pool array, providing a way to seed the generator or introduce entropy into the system for generating pseudorandom numbers. The XOR operation helps ensure that each bit of the input has an effect on the state of the generator.
+This function is used to mix the bits of the input integer x (the seed time) into the pool array, providing a way to seed the generator or introduce entropy into the system for generating pseudorandom numbers. The XOR operation helps ensure that each bit of the input has an effect on the state of the generator.
 
 ```javascript
 this.seedInt = function (x) {
