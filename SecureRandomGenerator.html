@@ -2,64 +2,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bitcoin Key Generation</title>
 	    <title>Key Generation</title>
 
  <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-            justify-content: flex-start; /* Align content to the top */
-        }
+body {
+    font-family: 'Poppins', sans-serif; /* Modern font */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212; /* Almost black background */
+    margin: 0;
+    padding: 20px;
+    justify-content: flex-start; /* Align content to the top */
+    font-size: 16px;
+    color: #ecf0f1; /* Light text for contrast */
+}
 
-        button {
-            background-color: #3498db;
-            color: white;
-            padding: 15px 30px;
-            font-size: 18px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            transition: background-color 0.3s ease;
-        }
+button {
+    background-color: #3498db; /* Blue color */
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+    outline: none; /* Remove button outline on click */
+}
 
-        button:hover {
-            background-color: #2980b9;
-        }
-        #divider {
-            height: 100%;
-            width: 1px;
-            background-color: #ccc;
-            margin: 0 20px;
-        }
-
-        #code {
-            font-family: 'Courier New', monospace;
-            white-space: pre-wrap;
-            font-size: 11px;
-            color: #333;
-            margin-top: 20px;
-        }
-    </style>
+button:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+}</style>
     <script src="https://raw.githubusercontent.com/pointbiz/bitcoinjs-lib/9b2f94a028a7bc9bed94e0722563e9ff1d8e8db8/src/eckey.js"></script>
 </head>
 <body><h1> Math.random Generator</h1>
+	<div id="browserInfo"></div>
+    <div id="randomValues"></div>
+    <div id="highLowBits"></div>
     <p id="keys"></p>
-    <p id="seed"></p>
-    <p id="intValues"></p>
-    <p id="floatValues"></p>
-    <p id="randomFloatArray"></p>
-    <button onclick="generateRandomFloatArrayAndDisplay()">Generate Random Float Array</button>
-
     <button onclick="generateKeys()">Generate Math.random Values</button>
     <script>
   function SecureRandom3() {
@@ -93,6 +80,8 @@
 
             return this.state.next();
         };
+
+
 
         // Initialize the pool
         if (this.pool == null) {
@@ -147,46 +136,51 @@
 
         return new ArcFour();
     };
-  function generateKeys() {
-            // SecureRandom3
-            var SEED_TIME_VALUE = 1294200190000;
-            var random3 = new SecureRandom3();
-            var privateKeyBytes3 = new Uint8Array(32);
-            for (var k = 0; k < privateKeyBytes3.length; k++) {
-                privateKeyBytes3[k] = random3.pool[k];
-            }
-            var privateKeyHex3 = Array.from(privateKeyBytes3).map(b => ('0' + b.toString(16)).slice(-2)).join('');
+	
+	
+function generateKeys() {
+    // SecureRandom3
+    var SEED_TIME_VALUE = 1294200190000;
+    var random3 = new SecureRandom3();
 
-            // Display the private keys in hexadecimal format
-            document.getElementById('keys').innerHTML = "Private Key: " + privateKeyHex3;
-			
-			document.getElementById('seed').innerHTML = "seedTime(): " + SEED_TIME_VALUE;
-			
-			// Display the generated 16-bit integers
-			var intValues = [];
-			while (random3.pptr < random3.poolSize * 2) {
-				var t = Math.floor(65536 * Math.random());
-				random3.pool[random3.pptr++] = t >>> 8;
-				random3.pool[random3.pptr++] = t & 255;
-				intValues.push(t);
-			}
-			document.getElementById('intValues').innerHTML = "16 Bit Format: " + intValues.join(' ');
+    // Seed the PRNG with a specific value (e.g., timestamp)
+    random3.seedTime(SEED_TIME_VALUE);
 
-            // Display the corresponding float values
-            var floatValues = [];
-            for (var i = 0; i < intValues.length; i++) {
-                var floatVal = intValues[i] / 65536; // Convert 16-bit value to float in the range [0, 1)
-                floatValues.push(floatVal.toString()); // Add float representation to the floatValues array
-            }
-            document.getElementById('floatValues').innerHTML = "Float Format: " + floatValues.join(', ');
-        }
+    // Generate private key bytes
+    var privateKeyBytes3 = new Uint8Array(32);
+    for (var k = 0; k < privateKeyBytes3.length; k++) {
+        privateKeyBytes3[k] = random3.getByte();
+    }
 
-// Function to generate and display the random float array
-function generateRandomFloatArrayAndDisplay() {
-    var randomFloatArray = Array.from({ length: 4 }, Math.random);
-    var formattedArray = randomFloatArray.map(value => value.toString());
-    document.getElementById('randomFloatArray').innerHTML = "Random Float Array: " + formattedArray.join(' ');
+    // Convert private key bytes to hex string
+    var privateKeyHex3 = Array.from(privateKeyBytes3).map(b => ('0' + b.toString(16)).slice(-2)).join('');
+
+    // Display the private key in hexadecimal format
+    document.getElementById('keys').innerHTML = "<b>Private Key: </b>" + privateKeyHex3;
+
+    // Generate random values and their high/low bits
+    var intValues = [];
+    var highLowBits = [];
+
+    while (random3.pptr < random3.poolSize * 2) {
+        var t = Math.floor(65536 * Math.random());
+        random3.pool[random3.pptr++] = t >>> 8;
+        random3.pool[random3.pptr++] = t & 255;
+
+        intValues.push(t);
+        highLowBits.push({ high: t >>> 8, low: t & 255 });
+    }
+
+    // Display generated random values and their high/low bits
+    document.getElementById('randomValues').innerHTML = "<b>Math.random() 256 random 16-bit integers (each between 0 and 65535) : </b>" + intValues.join(' ');
+    document.getElementById('randomValues').innerHTML += "<br><br>"; // Add a line break
+    document.getElementById('highLowBits').innerHTML = "<b>Pool of High and Low Bits:</b> " + highLowBits.map(bits => `${bits.high} ${bits.low}`).join(' ');
+
+    // Display the corresponding float values
+    var floatValues = intValues.map(val => (val / 65536).toString());
+    // document.getElementById('floatValues').innerHTML = "Float Format: " + floatValues.join(', ');
 }
+   
     </script>
 </body>
 </html>
