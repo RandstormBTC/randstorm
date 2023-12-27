@@ -38,7 +38,27 @@ Original value: 36222 (16-bit binary representation: 1000110110001110
 High byte: 0000000010001101 =  13
 Low byte:  000011100011110 =  222
 
-Therefore, for the value 36222, the high byte is 13, and the low byte is 222. These values are then stored in the this.pool.
+Therefore, for the value 36222, the high byte is 13, and the low byte is 222. These values are then stored in a pool of 256 values like this: 
+
+
+Current Pool : [
+  101, 187,  70, 233, 237, 155, 103,  43, 176,   6, 103,  47,
+  194, 180,  82, 147,  36,  24, 126, 132,  26, 247, 178, 161,
+  102, 171,  42, 173, 137, 121, 101,  29,  19, 107, 112, 132,
+  198,  71,  11,  44, 244, 154,  32,   0,  99, 226,  73, 154,
+  197,  98,  70, 239,  50,  15, 239, 209,  68,  60, 116, 121,
+  146,  13, 195, 112, 222, 166, 167,  66, 220, 156, 178,  51,
+   14, 250, 252,  44, 104,  53, 114, 146,  50,  37, 217, 242,
+  175,  19, 180, 145,  96,  31,  53,  35, 226, 203,  86,  25,
+   69,  51, 207,  30,
+  ... 156 more items
+]
+
+
+
+
+
+
 
 ##  Math.random() predictability 
 
