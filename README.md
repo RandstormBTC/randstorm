@@ -130,21 +130,11 @@ Updated Sequence: [0.9919811223107806, 0.48870040262493863, 0.4398739265503919, 
 
 Next Sequence: 0.7982242070609398
 ```
-```python
-Array.from(Array(5), Math.random)
-(5) [0.6297969575631002, 0.6074412953668151, 0.9919811223107806, 0.48870040262493863, 0.4398739265503919]
-Math.random()
-0.3283496320042738
-Math.random()
-0.37620797979266385
-Math.random()
-0.7982242070609398
-Math.random()
-0.6684147152303501
-```
-Use The HTML file to see what the output looks like when Math.Random loads the pool and generates a private key. The seedtime is set to a global value. 
 
-<img src="generateKeys.png" alt="GenerateValues">
+##  Math.random()
+One of the projects that used the vulnerable code for several years was Coinpunk. This allows you generate a wallet using the coinpunk-0.1.0 and outputs the Math.random() values that are generated during wallet creation. You can set SEED_TIME_VALUE = 1294200190000 in the .js file to change the current time it's seed at. 
+
+![https://github.com/RandstormBTC/randstorm/tree/main/coinpunk](https://raw.githubusercontent.com/RandstormBTC/randstorm/coinpunk/coinpunk/coinpunk.png)
 
 ## Vulnerable Wallets
 
