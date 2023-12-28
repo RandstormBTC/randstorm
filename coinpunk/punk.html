@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Coinpunk Wallet Generator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a; /* Dark background */
+            color: #f0f0f0; /* Light text */
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+    h1 {
+        font-family: 'Roboto Mono', monospace;
+        color: #ff9500; /* Bright pink for headings */
+        font-size: 2.5em;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+        #generateButton, #downloadButton {
+            background-color: #ff9500; /* Vibrant orange */
+            color: black;
+            padding: 12px 25px;
+            margin: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            transition: background-color 0.3s;
+        }
+
+        #generateButton:hover, #downloadButton:hover {
+            background-color: #ffbb33; /* Lighter orange on hover */
+        }
+
+        #walletsDisplay {
+            text-align: left;
+            background-color: #262626; /* Slightly lighter background for wallets */
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .wallet {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333333; /* Dark border for separation */
+            padding-bottom: 10px;
+            color: #ffcc00; /* Yellow text for wallet info */
+        }
+
+        .wallet:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+    <h1>Coinpunk 1.0 Wallet Generator</h1>
+    <button id="generateButton">Generate Wallets</button>
+    <button id="downloadButton" style="display:none;">Download Wallets</button>
+    <div id="walletsDisplay" style="text-align:center; margin-top:20px;"></div> 
+    <ul id="randomValues" style="list-style-type: none; padding: 0; text-align: center;"></ul>
+    <script src="bundle.js"></script>
+    <script>
+        document.getElementById('generateButton').addEventListener('click', function() {
+            const wallets = window.generateWallets(1); // Change the number of wallets you want to generate
+            let outputHtml = '';
+            wallets.forEach(wallet => {
+                outputHtml += `<p>${wallet.address}<br>${wallet.privateKeyWIF}</p>`;
+            });
+            document.getElementById('walletsDisplay').innerHTML = outputHtml;
+
+            // Assuming myRand is the instance of your Rand class from the bundle.js
+            var myRand = new Rand();
+            myRand.initPool();
+            myRand.displayValues();
+        });
+    </script>
+</body>
+</html>
