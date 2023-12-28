@@ -118,6 +118,10 @@ Final Pool: [
 
 Using [v8-randomness-predictor](https://github.com/PwnFunction/v8-randomness-predictor) or [v8_rand_buster](https://github.com/d0nutptr/v8_rand_buster/tree/master) to predict Math.random values. 
 
+This generates a wallet and WIF private key using the Coinpunk V1, which used the vulnerable code for several years. 
+
+A wallet is generated and below is the output of the Math.random() values generated for SEED_TIME_VALUE = 1294200190000;
+
 ![test](https://raw.githubusercontent.com/RandstormBTC/randstorm/coinpunk/coinpunk/coinpunk.png)
 
 ```bash
@@ -146,8 +150,6 @@ Math.random()
 0.6684147152303501
 ```
 Use The HTML file to see what the output looks like when Math.Random loads the pool and generates a private key. The seedtime is set to a global value. 
-
-<img src="generateKeys.png" alt="GenerateValues">
 
 ## Vulnerable Wallets
 
