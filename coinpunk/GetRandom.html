@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Number Generation Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: black;
+            color: white;
+        }
+
+        #generateButton {
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+            border: 2px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #generateButton:hover {
+            background-color: grey;
+        }
+
+        #randomValuesDisplay {
+            margin-top: 20px;
+            text-align: left;
+            display: inline-block;
+            text-align: left;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+    </style>
+    <script type="text/javascript">
+        var sr = window.SecureRandom = function () { };
+        sr.poolSize = 256;
+        sr.pool = new Array(sr.poolSize);
+        sr.pptr = 0;
+
+        // Function to display values
+        function displayValues(label, value) {
+            var displayElement = document.getElementById('randomValuesDisplay');
+            displayElement.innerHTML += '<div><span class="label">' + label + '</span>' + value + '</div>';
+        }
+
+        // Function to seed time and initialize pool
+        function seedTimeAndInitialize() {
+            var currentTime = new Date().getTime();
+            displayValues('Current Epoch Time: ', currentTime + '<br>');
+
+            // Initialize the pool with random values
+            sr.pptr = 0; // Reset pointer
+            var values = [];
+			//var startTime = performance.now(); // Displays ~ Execution time: 0.10000000009313226 milliseconds
+
+            while (sr.pptr < sr.poolSize) {
+                var t = Math.floor(65536 * Math.random());
+                sr.pool[sr.pptr++] = t >>> 8;
+                sr.pool[sr.pptr++] = t & 255;
+                if (values.length < 128) { // Limit to 128 values
+                    values.push(t);
+					
+                }
+				//var endTime = performance.now(); // End timing after the loop
+				//If the screen is Maximized no additional entropy is provided as X and Y = 0.
+				//sr.seedInt(window.screenX);
+				//sr.seedInt(window.screenY);
+            }
+            displayValues('<br>' + '128 Random Values: ', values.join(', ') + '<br>');
+			//displayValues('<br>' + 'Execution time: ' + (endTime - startTime) + ' milliseconds' + '<br>');
+        }
+
+        // Function to generate and display
+        function generateAndDisplay() {
+            // Clear previous content
+            document.getElementById('randomValuesDisplay').innerHTML = '';
+
+            // Seed time and initialize pool
+            seedTimeAndInitialize();
+        }
+    </script>
+</head>
+<body>
+    <button id="generateButton" onclick="generateAndDisplay()">Generate and Display</button>
+    <div id="randomValuesDisplay"></div>
+</body>
+</html>
+
